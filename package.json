@@ -1,0 +1,42 @@
+{
+  "name": "app_editora_expo",
+  "version": "1.0.0",
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo-google-fonts/quicksand": "^0.2.3",
+    "@expo/webpack-config": "^18.0.1",
+    "@react-native-masked-view/masked-view": "0.2.8",
+    "@react-navigation/bottom-tabs": "^6.5.8",
+    "@react-navigation/drawer": "^6.6.3",
+    "@react-navigation/stack": "^6.3.16",
+    "@rneui/base": "^0.0.0-edge.2",
+    "@rneui/themed": "^0.0.0-edge.2",
+    "axios": "^1.4.0",
+    "expo": "~48.0.18",
+    "expo-font": "~11.1.1",
+    "expo-status-bar": "~1.4.4",
+    "jwt-decode": "^3.1.2",
+    "lucide-react-native": "^0.248.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-native": "0.71.8",
+    "react-native-fit-image": "^1.5.5",
+    "react-native-gesture-handler": "~2.9.0",
+    "react-native-ratings": "^8.1.0",
+    "react-native-reanimated": "~2.14.4",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "~0.18.10",
+    "expo-secure-store": "~12.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}
