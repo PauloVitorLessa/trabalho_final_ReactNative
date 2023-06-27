@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
@@ -15,8 +16,11 @@ export default function Login({ navigation }) {
   const [senha, setSenha] = useState("");
   const { armazenarDadosUsuario } = useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   const handleLogin = async () => {
+    setLoadingLogin(true);
+
     console.log(`E-mail: ${email} - Senha: ${senha}`);
     try {
       const resultado = await AxiosInstance.post("/auth/signin", {
@@ -27,13 +31,14 @@ export default function Login({ navigation }) {
       if (resultado.status === 200) {
         var jwtToken = resultado.data;
         armazenarDadosUsuario(jwtToken["accessToken"]);
-
+        setLoadingLogin(false);
         navigation.navigate("TabRoutes");
       } else {
         console.log("Erro ao realizar o login");
       }
     } catch (error) {
       console.log("erro durante o processo de login: " + error);
+      setLoadingLogin(false);
     }
   };
 
@@ -72,7 +77,13 @@ export default function Login({ navigation }) {
         </View>
       </View>
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+        {
+          loadingLogin ? (
+            <ActivityIndicator size={20} color="#FFF"/>
+          ) : (
+            <Text style={styles.buttonText}>Login</Text>
+          )
+        }
       </TouchableOpacity>
     </View>
   );
