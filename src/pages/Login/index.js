@@ -28,7 +28,7 @@ export default function Login({ navigation }) {
         var jwtToken = resultado.data;
         armazenarDadosUsuario(jwtToken["accessToken"]);
 
-        navigation.navigate("DrawerRoutes");
+        navigation.navigate("TabRoutes");
       } else {
         console.log("Erro ao realizar o login");
       }

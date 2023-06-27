@@ -10,7 +10,6 @@ import {
   Dimensions,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
-import { Rating } from "react-native-ratings";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { EditoraContext } from "../../context/EditoraContext";
@@ -104,11 +103,10 @@ const RenderHomeEditora = ({ item, navigation }) => {
   );
 };
 
-const generateData = () => {
-  const { dadosEditora } = useContext(EditoraContext);
+const generateData = (livrosEditora) => {
   const dataList = [];
-  const listaLivros = dadosEditora.listaLivrosDTO;
-  console.log("lista editoras");
+  const listaLivros = livrosEditora;
+  console.log("listaLivrosEditora");
   console.log(listaLivros);
 
   let size = listaLivros.length / 5;
@@ -122,7 +120,7 @@ const generateData = () => {
         img: listaLivros[j + count]?.imagem,
         title: listaLivros[j + count]?.nomeLivro,
         codigoLivro: listaLivros[j + count]?.codigoLivro,
-        //description: listaLivros[j + count]?.description,
+        descricao: listaLivros[j + count]?.descricao,
       });
     }
     dataList.push(data);
@@ -135,9 +133,31 @@ const generateData = () => {
 
 export default function Editora({ navigation }) {
   const { dadosUsuario } = useContext(DataContext);
-  const [dadosEditora, setDadosEditora] = useState();
+  const { dadosEditora } = useContext(EditoraContext);
+  const [livrosEditora, setLivrosEditora] = useState([]);
 
-  const dataList = generateData();
+  useEffect(() => {
+    const getLivrosEditora = async () => {
+      await AxiosInstance.get(
+        `/livros/por-editora/${dadosEditora.codigoEditora}`,
+        {
+          headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
+        }
+      )
+        .then((resultado) => {
+          console.log("GetLivrosEditora:" + resultado.data);
+          setLivrosEditora(resultado.data);
+        })
+        .catch((error) => {
+          console.log(
+            "Ocorreu um erro ao recuperar os livros da Editora: " + error
+          );
+        });
+    };
+    getLivrosEditora();
+  }, []);
+
+  const dataList = generateData(livrosEditora);
 
   return (
     <View style={styles.container}>

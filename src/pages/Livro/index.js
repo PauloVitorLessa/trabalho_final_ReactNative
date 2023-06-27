@@ -25,13 +25,14 @@ export default function Livro() {
       <View style={styles.content}>
         <Image
           source={{
-            //uri: `data:image/png;base64,${dadosLivro.img}`,
-            uri: `https://apilivraria-production.up.railway.app/api/livros/img/${dadosLivro.codigoLivro}`,
+            uri: `data:image/png;base64,${dadosLivro.img}`,
+            //uri: `https://apilivraria-production.up.railway.app/api/livros/img/${dadosLivro.codigoLivro}`,
           }}
           style={styles.imageCardLivro}
         ></Image>
         <View style={styles.cardInfo}>
           <Text style={styles.cardTitle}>{dadosLivro.title}</Text>
+          <Text style={styles.cardDescription}>{dadosLivro.descricao}</Text>
           <TouchableOpacity style={styles.botao}>
             <Text style={styles.cardTitle}>COMPRAR</Text>
           </TouchableOpacity>
@@ -53,8 +54,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   cardTitle: {
+    fontSize: 20,
     color: "white",
     textAlign: "center",
+  },
+  cardDescription: {
+    //fontSize: 20,
+    color: "white",
+    textAlign: "center",
+    marginTop: 20,
   },
   imageCardLivro: {
     width: windowWidth / 2,

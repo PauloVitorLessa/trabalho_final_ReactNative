@@ -1,9 +1,10 @@
 import { createStackNavigator } from "@react-navigation/stack";
 
-import Home from "../pages/Home";
 import Editora from "../pages/Editora";
 import HomeEditoras from "../pages/HomeEditoras";
 import Livro from "../pages/Livro";
+import TabRoutes from "./TabRoutes";
+import Login from "../pages/Login";
 
 const Stack = createStackNavigator();
 
@@ -16,10 +17,16 @@ export default function StackRoutes() {
           backgroundColor: "black",
         },
         headerTintColor: "white",
-        headerShown: false,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen
+        name="TabRoutes"
+        component={TabRoutes}
+        options={{
+          title: "Home",
+        }}
+      />
       <Stack.Screen name="Editora" component={Editora} />
       <Stack.Screen name="Editoras" component={HomeEditoras} />
       <Stack.Screen name="Livro" component={Livro} />
