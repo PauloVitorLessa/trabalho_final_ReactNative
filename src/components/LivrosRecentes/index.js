@@ -6,7 +6,7 @@ import {
   FlatList,
   StyleSheet,
   Image,
-  ScrollView,
+  ActivityIndicator,
   Dimensions,
 } from "react-native";
 import AxiosInstance from "../../api/AxiosInstance";
@@ -37,11 +37,12 @@ const Item = ({ img, nav, item, func }) => (
 export default function LivrosRecentes({ navigation }) {
   const { dadosUsuario } = useContext(DataContext);
   const { armazenarDadosLivro } = useContext(LivroContext);
-
+  const [loadingLogin, setLoadingLogin] = useState(false);
   const [dadosLivros, setDadosLivros] = useState("");
 
   useEffect(() => {
     getTodosLivros();
+    setLoadingLogin(true);
   }, []);
 
   const getTodosLivros = async () => {
@@ -52,6 +53,7 @@ export default function LivrosRecentes({ navigation }) {
     )
       .then((resultado) => {
         setDadosLivros(resultado.data);
+        setLoadingLogin(false);
       })
       .catch((error) => {
         console.log(
@@ -64,20 +66,24 @@ export default function LivrosRecentes({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>RECENTES</Text>
       <View style={styles.livros}>
-        <FlatList
-          data={dadosLivros}
-          renderItem={({ item }) => (
-            <Item
-              img={item.img}
-              nav={navigation}
-              nome={item.nomeEditora}
-              item={item}
-              func={armazenarDadosLivro}
-            />
-          )}
-          keyExtractor={(item) => item.codigoLivro}
-          horizontal={true}
-        />
+      {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" alignItems="center"/>
+        ) : (
+          <FlatList
+            data={dadosLivros}
+            renderItem={({ item }) => (
+              <Item
+                img={item.img}
+                nav={navigation}
+                nome={item.nomeEditora}
+                item={item}
+                func={armazenarDadosLivro}
+              />
+            )}
+            keyExtractor={(item) => item.codigoLivro}
+            horizontal={true}
+          />
+        )}
       </View>
     </View>
   );

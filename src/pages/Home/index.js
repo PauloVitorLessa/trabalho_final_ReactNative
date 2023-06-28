@@ -14,12 +14,6 @@ import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { EditoraContext } from "../../context/EditoraContext";
 import LivrosRecentes from "../../components/LivrosRecentes";
-import {
-  addCarrinho,
-  getValueFor,
-  deleteValue,
-} from "../../services/DataService";
-import Destaques from "../../components/Destaques";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -81,6 +75,7 @@ export default function Home({ navigation }) {
   const [livro, setLivro] = useState('');
 
   useEffect(() => {
+    setLoadingLogin(true);
     getTodasEditoras();
     getLivro();
   }, []);
@@ -101,11 +96,12 @@ export default function Home({ navigation }) {
   };
 
   const getLivro = async () => {
-    await AxiosInstance.get("/livros/2", {
+    await AxiosInstance.get("/livros/1", {
       headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
     })
       .then((resultado) => {
         setLivro(resultado.data);
+        setLoadingLogin(false);
       })
       .catch((error) => {
         console.log(
@@ -118,7 +114,6 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <View style={styles.editorasContainer}>
         <Text style={styles.title}>EDITORAS</Text>
-        <Destaques />
         {loadingLogin ? (
           <ActivityIndicator size={20} color="#FFF" />
         ) : (
