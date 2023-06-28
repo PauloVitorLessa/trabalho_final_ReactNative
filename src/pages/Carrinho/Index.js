@@ -23,6 +23,7 @@ const windowHeight = Dimensions.get("window").height;
 export default function Carrinho({ navigation }) {
   const [livrosCarrinhoDB, setLivrosCarrinhoDB] = useState([]);
   const [checked, setChecked] = React.useState("first");
+  const [selectedBook, setSelectedBook] = React.useState("");
 
   useFocusEffect(
     React.useCallback(() => {
@@ -30,12 +31,40 @@ export default function Carrinho({ navigation }) {
         const livrosCarrinho = await getValueFor("carrinho");
         setLivrosCarrinhoDB(livrosCarrinho);
       })();
-    }, [])
+    }, [livrosCarrinhoDB])
   );
   const handleButton = async () => {
     await deleteValue("carrinho");
 
     navigation.navigate("PedidoFinalizado");
+  };
+
+  const handleOnPress = (item) => {
+    setSelectedBook(item);
+  };
+  const handleTrash = async () => {
+    if (selectedBook) {
+      console.log("selected book :" + JSON.stringify(selectedBook));
+      try {
+        let resultArray = [];
+        let result = await getValueFor("carrinho");
+        console.log("result :" + JSON.stringify(result));
+        if (result) {
+          resultArray = result;
+          console.log("arrey from db :" + JSON.stringify(resultArray));
+          resultArray = resultArray.filter(
+            (element) => element.codigoLivro !== selectedBook.codigoLivro
+          );
+
+          console.log("arrey to db :" + JSON.stringify(resultArray));
+
+          await save("carrinho", resultArray);
+          setLivrosCarrinhoDB(resultArray);
+        }
+      } catch (error) {
+        console.log("erro ao persistir dados no addCarrinho:" + error);
+      }
+    }
   };
 
   return (
@@ -45,7 +74,10 @@ export default function Carrinho({ navigation }) {
           <Text style={styles.cardTitle}>Carrinho</Text>
           <Text style={styles.text}>Produtos</Text>
         </View>
-        <TouchableOpacity style={styles.trashButton}>
+        <TouchableOpacity
+          style={styles.trashButton}
+          onPress={() => handleTrash()}
+        >
           <FontAwesome name="trash" size={24} color="white" />
         </TouchableOpacity>
       </View>
@@ -53,11 +85,16 @@ export default function Carrinho({ navigation }) {
         <FlatList
           data={livrosCarrinhoDB}
           renderItem={({ item }) => (
-            <CardCarrinho
-              codigoLivro={item.codigoLivro}
-              title={item.title}
-              quantidade={item.quantidade}
-            ></CardCarrinho>
+            <TouchableOpacity
+              onPress={() => handleOnPress(item)}
+              style={selectedBook === item ? styles.btnActive : styles.btn}
+            >
+              <CardCarrinho
+                codigoLivro={item.codigoLivro}
+                title={item.title}
+                quantidade={item.quantidade}
+              ></CardCarrinho>
+            </TouchableOpacity>
           )}
           keyExtractor={(item) => item.codigoLivro}
         />
@@ -191,4 +228,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
   },
+  btnActive: {
+    backgroundColor: "#2D2033",
+  },
+  btn: {},
 });

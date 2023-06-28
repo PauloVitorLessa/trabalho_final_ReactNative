@@ -6,6 +6,8 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import React from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { useState, useContext, useEffect } from "react";
 import { save, getValueFor, deleteValue } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
@@ -15,6 +17,26 @@ const windowHeight = Dimensions.get("window").height;
 
 export default function CardCarrinho(props) {
   const [quantity, setQuantity] = useState(0);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getLivroCarrinho();
+    }, [])
+  );
+
+  const getLivroCarrinho = async () => {
+    try {
+      let result = await getValueFor("carrinho");
+      if (result) {
+        let livro = result.filter(
+          (livro) => livro.codigoLivro === props.codigoLivro
+        );
+        setQuantity(livro[0].quantidade);
+      }
+    } catch (error) {
+      console.log("erro ao persistir dados no addCarrinho:" + error);
+    }
+  };
 
   const incrementQuantity = () => {
     setQuantity(quantity + 1);
@@ -58,9 +80,8 @@ const styles = StyleSheet.create({
   },
 
   CardLivroHorizontal: {
-    backgroundColor: "#2D2033",
-    borderColor: "black",
-    borderRadius: 5,
+    //backgroundColor: "#2D2033",
+
     paddingBottom: 0,
     flexDirection: "row",
     marginBottom: 5,
