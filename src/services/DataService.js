@@ -33,9 +33,7 @@ export async function addCarrinho(key, value) {
     if (result) {
       resultArray = JSON.parse(result);
       let existente = false;
-      console.log("valor:" + JSON.stringify(resultArray));
       resultArray.forEach((element) => {
-        console.log("elemente: " + JSON.stringify(element));
         if (element.codigoLivro === value.codigoLivro) {
           element.quantidade = element.quantidade + value.quantidade;
           existente = true;

@@ -9,7 +9,12 @@ import {
 import React from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useState, useContext, useEffect } from "react";
-import { save, getValueFor, deleteValue } from "../../services/DataService";
+import {
+  save,
+  getValueFor,
+  deleteValue,
+  addCarrinho,
+} from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
@@ -38,13 +43,27 @@ export default function CardCarrinho(props) {
     }
   };
 
-  const incrementQuantity = () => {
-    setQuantity(quantity + 1);
+  const incrementQuantity = async () => {
+    let livro = props;
+    livro.quantidade = 1;
+    try {
+      await addCarrinho("carrinho", livro);
+
+      setQuantity(quantity + 1);
+    } catch (error) {
+      console.log("erro ao persistir dados no addCarrinho:" + error);
+    }
   };
 
-  const decrementQuantity = () => {
-    if (quantity > 1) {
+  const decrementQuantity = async () => {
+    let livro = props;
+    livro.quantidade = -1;
+    try {
+      await addCarrinho("carrinho", livro);
+
       setQuantity(quantity - 1);
+    } catch (error) {
+      console.log("erro ao persistir dados no addCarrinho:" + error);
     }
   };
 
