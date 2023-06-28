@@ -26,6 +26,7 @@ export default function TabRoutes() {
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" color={color} size={size} />
           ),
+          headerLeft: () => null
         }}
       />
       <Tab.Screen

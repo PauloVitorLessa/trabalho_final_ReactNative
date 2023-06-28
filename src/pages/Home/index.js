@@ -14,11 +14,6 @@ import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { EditoraContext } from "../../context/EditoraContext";
 import LivrosRecentes from "../../components/LivrosRecentes";
-import {
-  addCarrinho,
-  getValueFor,
-  deleteValue,
-} from "../../services/DataService";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -77,9 +72,12 @@ export default function Home({ navigation }) {
   const { armazenarListaEditora } = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState();
   const [loadingLogin, setLoadingLogin] = useState(false);
+  const [livro, setLivro] = useState('');
 
   useEffect(() => {
+    setLoadingLogin(true);
     getTodasEditoras();
+    getLivro();
   }, []);
 
   const getTodasEditoras = async () => {
@@ -93,6 +91,21 @@ export default function Home({ navigation }) {
       .catch((error) => {
         console.log(
           "Ocorreu um erro ao recuperar os dados das Editoras: " + error
+        );
+      });
+  };
+
+  const getLivro = async () => {
+    await AxiosInstance.get("/livros/1", {
+      headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
+    })
+      .then((resultado) => {
+        setLivro(resultado.data);
+        setLoadingLogin(false);
+      })
+      .catch((error) => {
+        console.log(
+          "Ocorreu um erro ao recuperar os dados: " + error
         );
       });
   };
@@ -120,9 +133,9 @@ export default function Home({ navigation }) {
       <View style={styles.destaqueContainer}>
         <Text style={styles.recentesContainer.text}>Destaque</Text>
         <CardDestaque
-          urlImage={"https://m.media-amazon.com/images/I/819js3EQwbL.jpg"}
-          title={"1984"}
-          description={"Livro sobre uma distopia"}
+          urlImage={`data:image/png;base64,${livro.img}`}
+          title={livro.nomeLivro}
+          description={livro.descricao}
           rating={DATA_DESTAQUE.rating}
         />
       </View>
