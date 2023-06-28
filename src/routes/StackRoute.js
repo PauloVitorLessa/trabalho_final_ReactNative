@@ -8,6 +8,8 @@ import TabRoutes from "./TabRoutes";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Carrinho from "../pages/Carrinho/Index";
+import { useContext } from "react";
+import { EditoraContext } from "../context/EditoraContext";
 
 const Stack = createStackNavigator();
 
@@ -27,7 +29,7 @@ export function StackLogin() {
       <Stack.Screen
         name="Home"
         component={TabRoutes}
-        options={{ title: "Livraria G4", headerLeft: () => null }}
+        options={{ title: "Livraria G3", headerLeft: () => null }}
       />
     </Stack.Navigator>
   );
@@ -61,6 +63,8 @@ export function StackCarrinho() {
   );
 }
 export function StackHome() {
+  const { dadosEditora } = useContext(EditoraContext);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -80,7 +84,7 @@ export function StackHome() {
       <Stack.Screen
         name="Editora"
         component={Editora}
-        options={{ title: "Editora X" }}
+        options={{ title: `${dadosEditora.nomeEditora}` }}
       />
       <Stack.Screen
         name="Livro"
@@ -92,6 +96,8 @@ export function StackHome() {
 }
 
 export function StackEditoras() {
+  const { dadosEditora } = useContext(EditoraContext);
+
   return (
     <Stack.Navigator
       screenOptions={{
@@ -110,7 +116,7 @@ export function StackEditoras() {
       <Stack.Screen
         name="Editora"
         component={Editora}
-        options={{ title: "Editora X" }}
+        options={{ title: `${dadosEditora.nomeEditora}` }}
       />
       <Stack.Screen
         name="Livro"
