@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
-  ImageBackground,
+  ActivityIndicator,
   Dimensions,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
@@ -76,6 +76,7 @@ export default function Home({ navigation }) {
   const { dadosUsuario } = useContext(DataContext);
   const { armazenarListaEditora } = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState();
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   useEffect(() => {
     getTodasEditoras();
@@ -100,16 +101,19 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       <View style={styles.editorasContainer}>
         <Text style={styles.title}>EDITORAS</Text>
-
-        <FlatList
-          //disableScrollViewPanResponder
-          horizontal={true}
-          data={dadosEditora}
-          renderItem={({ item }) => (
-            <Editora item={item} navigation={navigation} />
-          )}
-          keyExtractor={(item) => item.codigoEditora}
-        />
+        {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" />
+        ) : (
+          <FlatList
+            //disableScrollViewPanResponder
+            horizontal={true}
+            data={dadosEditora}
+            renderItem={({ item }) => (
+              <Editora item={item} navigation={navigation} />
+            )}
+            keyExtractor={(item) => item.codigoEditora}
+          />
+        )}
       </View>
       {/* Chama do card de Livros Recentes */}
       <LivrosRecentes navigation={navigation} />
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
   container: {
     //alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     flex: 1,
   },
   editorasContainer: {
@@ -216,6 +220,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     paddingBottom: 10,
+    marginTop: 10,
   },
   imageEditora: {
     width: 70,

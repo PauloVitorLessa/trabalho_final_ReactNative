@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
+  Image,
   View,
   TextInput,
   TouchableOpacity,
@@ -70,6 +71,7 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Image style={styles.logo} source={require("../../assets/logo.png")} />
       <Text style={styles.text}>Bem-vindos</Text>
       <TextInput
         onChangeText={setEmail}
@@ -113,23 +115,23 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     flex: 1,
   },
   text: {
     color: "white",
-    fontSize: 50,
-    marginBottom: 30,
+    fontSize: 20,
+    margin: 30,
   },
   input: {
-    backgroundColor: "white",
+    backgroundColor: "#d3d3d3",
     borderWidth: 2,
     marginBottom: 20,
     borderRadius: 5,
     padding: 9,
     width: 270,
     height: 40,
-    borderColor: "green",
+    borderColor: "#101b1b",
     fontSize: 16,
   },
   passwordInputContainer: {
@@ -140,13 +142,13 @@ const styles = StyleSheet.create({
   passwordInputWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#d3d3d3",
     borderRadius: 5,
     width: 270,
     height: 40,
     padding: 5,
     borderWidth: 2,
-    borderColor: "green",
+    borderColor: "#101b1b",
   },
   passwordInput: {
     flex: 1,
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
     padding: 2, // Reduzi o tamanho do padding
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: "#f95c47",
     marginTop: 10,
     width: 270,
     height: 40,
@@ -169,4 +171,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
   },
+  logo: {
+    width: 150,
+    height: 150,
+    shadowColor: '#171717',
+    shadowOffset: {width: -3, height: 5},
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
+  }
 });

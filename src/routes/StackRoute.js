@@ -19,13 +19,11 @@ export default function StackRoutes() {
         headerTintColor: "white",
       }}
     >
-      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
       <Stack.Screen
         name="TabRoutes"
         component={TabRoutes}
-        options={{
-          title: "Home",
-        }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen name="Editora" component={Editora} />
       <Stack.Screen name="Editoras" component={HomeEditoras} />
