@@ -14,7 +14,7 @@ export async function getValueFor(key) {
     if (result) {
       return JSON.parse(result);
     } else {
-      alert("No values stored under that key.");
+      alert("Seu Carrinho está vazio ☹️");
     }
   } catch (error) {
     console.log("erro ao recuperar dados:" + error);

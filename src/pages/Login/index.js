@@ -54,7 +54,7 @@ export default function Login({ navigation }) {
         ];
         inicializaCarrinho("carrinho", carrinho);
 
-        navigation.navigate("TabRoutes");
+        navigation.navigate("StackRoutes");
       } else {
         console.log("Erro ao realizar o login");
       }

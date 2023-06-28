@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext, useState, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   Text,
   View,
@@ -21,13 +22,28 @@ const windowHeight = Dimensions.get("window").height;
 export default function Carrinho() {
   const [livrosCarrinhoDB, setLivrosCarrinhoDB] = useState([]);
 
-  useEffect(() => {
-    getCarrinhoFromDB();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      (async () => {
+        const livrosCarrinho = await getValueFor("carrinho");
+        setLivrosCarrinhoDB(livrosCarrinho);
+      })();
+    }, [])
+  );
+
+  // useEffect(() => {
+  //   console.log("carregou carrinho:");
+  //   (async () => {
+  //     const livrosCarrinho = await getValueFor("carrinho");
+  //     setLivrosCarrinhoDB(livrosCarrinho);
+  //   })();
+  //   //getCarrinhoFromDB().then((livros) => setLivrosCarrinhoDB(livros));
+  // }, []);
 
   const getCarrinhoFromDB = async () => {
-    const livrosCarrinho = await getValueFor("carrinho");
-    setLivrosCarrinhoDB(livrosCarrinho);
+    await getValueFor("carrinho");
+    //const livrosCarrinho = await getValueFor("carrinho");
+    //setLivrosCarrinhoDB(livrosCarrinho);
   };
 
   return (

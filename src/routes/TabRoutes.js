@@ -3,9 +3,10 @@ import { MaterialIcons } from "@expo/vector-icons";
 
 import StackRoutes from "./StackRoute";
 
-import Home from "../pages/Home";
-import HomeEditoras from "../pages/HomeEditoras";
+//import Home from "../pages/Home";
+import Login from "../pages/Login";
 import Carrinho from "../pages/Carrinho/Index";
+import HomeEditoras from "../pages/HomeEditoras";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,8 +20,17 @@ export default function TabRoutes() {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Login"
+        component={Login}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="StackRoutes"
+        component={StackRoutes}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" color={color} size={size} />
