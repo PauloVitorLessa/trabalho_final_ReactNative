@@ -66,8 +66,8 @@ export default function LivrosRecentes({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title}>RECENTES</Text>
       <View style={styles.livros}>
-      {loadingLogin ? (
-          <ActivityIndicator size={20} color="#FFF" alignItems="center"/>
+        {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" alignItems="center" />
         ) : (
           <FlatList
             data={dadosLivros}
@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   tinyLogo: {
-    width: 120,
-    height: 190,
-    borderColor: "#101b1b",
-    borderWidth: 3,
+    width: 100,
+    height: 150,
+    //borderColor: "#101b1b",
+    // borderWidth: 3,
     //backgroundColor: "green",
     resizeMode: "contain",
     shadowColor: "#171717",

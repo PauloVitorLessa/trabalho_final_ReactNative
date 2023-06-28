@@ -59,10 +59,9 @@ const CardDestaque = ({ urlImage, title, description, rating }) => (
       <View>
         <Text style={styles.cardTitle}>{title}</Text>
         <Text style={styles.cardDescription}>{description}</Text>
-      </View>
-      <View style={styles.rating}>
         <Rating startingValue={4} readonly imageSize={20} />
       </View>
+      <View style={styles.rating}></View>
     </View>
   </View>
 );
@@ -72,7 +71,7 @@ export default function Home({ navigation }) {
   const { armazenarListaEditora } = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState();
   const [loadingLogin, setLoadingLogin] = useState(false);
-  const [livro, setLivro] = useState('');
+  const [livro, setLivro] = useState("");
 
   useEffect(() => {
     setLoadingLogin(true);
@@ -96,7 +95,7 @@ export default function Home({ navigation }) {
   };
 
   const getLivro = async () => {
-    await AxiosInstance.get("/livros/1", {
+    await AxiosInstance.get("/livros/17", {
       headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
     })
       .then((resultado) => {
@@ -104,9 +103,7 @@ export default function Home({ navigation }) {
         setLoadingLogin(false);
       })
       .catch((error) => {
-        console.log(
-          "Ocorreu um erro ao recuperar os dados: " + error
-        );
+        console.log("Ocorreu um erro ao recuperar os dados: " + error);
       });
   };
 
@@ -166,9 +163,9 @@ const styles = StyleSheet.create({
     },
   },
   destaqueContainer: {
-    alignItems: "flex-start",
+    //alignItems: "flex-start",
 
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     //flex: 1,
 
     text: {
@@ -188,7 +185,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     color: "black",
     fontSize: 16,
-    textAlign: "left",
+    textAlign: "center",
     borderRadius: 10,
     paddingLeft: 3,
   },
@@ -249,8 +246,8 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
   },
   imageCardDestaque: {
-    width: windowWidth - 10,
-    height: windowHeight / 4,
+    width: windowWidth - 20,
+    height: windowHeight / 5,
     resizeMode: "cover",
   },
   CardLivro: {
@@ -262,16 +259,18 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   CardDestaque: {
-    backgroundColor: "white",
+    // backgroundColor: "white",
     borderColor: "black",
-    alignSelf: "center",
-    borderRadius: 5,
     paddingBottom: 3,
     marginTop: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   destaqueBodyContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: "aliceblue",
+    height: 300,
   },
   rating: {
     padding: 10,
