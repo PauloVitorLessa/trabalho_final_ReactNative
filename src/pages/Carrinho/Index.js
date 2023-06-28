@@ -31,7 +31,7 @@ export default function Carrinho({ navigation }) {
         const livrosCarrinho = await getValueFor("carrinho");
         setLivrosCarrinhoDB(livrosCarrinho);
       })();
-    }, [livrosCarrinhoDB])
+    }, [])
   );
   const handleButton = async () => {
     await deleteValue("carrinho");
@@ -87,7 +87,11 @@ export default function Carrinho({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               onPress={() => handleOnPress(item)}
-              style={selectedBook === item ? styles.btnActive : styles.btn}
+              style={
+                selectedBook.codigoLivro === item.codigoLivro
+                  ? styles.btnActive
+                  : styles.btn
+              }
             >
               <CardCarrinho
                 codigoLivro={item.codigoLivro}

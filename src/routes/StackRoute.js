@@ -27,8 +27,7 @@ export function StackLogin() {
       <Stack.Screen
         name="Home"
         component={TabRoutes}
-        options={{ title: "Livraria G4",
-        headerLeft: () => null }}
+        options={{ title: "Livraria G4", headerLeft: () => null }}
       />
     </Stack.Navigator>
   );
@@ -40,7 +39,7 @@ export function StackCarrinho() {
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "black",
+          backgroundColor: "red",
         },
         headerTintColor: "white",
       }}
@@ -67,7 +66,8 @@ export function StackHome() {
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "black",
+          backgroundColor: "#696462",
+          height: 60,
         },
         headerTintColor: "white",
       }}
@@ -75,8 +75,7 @@ export function StackHome() {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{ title: "Livraria G3",
-        headerLeft: () => null }} 
+        options={{ title: "Livraria G3", headerLeft: () => null }}
       />
       <Stack.Screen
         name="Editora"
@@ -106,8 +105,7 @@ export function StackEditoras() {
       <Stack.Screen
         name="Editoras"
         component={HomeEditoras}
-        options={{ title: "Editoras",
-        headerLeft: () => null }}
+        options={{ title: "Editoras", headerLeft: () => null }}
       />
       <Stack.Screen
         name="Editora"
