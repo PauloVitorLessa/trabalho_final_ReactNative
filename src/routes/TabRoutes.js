@@ -14,8 +14,8 @@ export default function TabRoutes() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "green",
-        tabBarInactiveTintColor: "gray",
+        tabBarActiveTintColor: "#696462",
+        tabBarInactiveTintColor: "#4a4645",
         headerShown: false,
       }}
     >
