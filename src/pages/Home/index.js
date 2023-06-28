@@ -19,6 +19,7 @@ import {
   getValueFor,
   deleteValue,
 } from "../../services/DataService";
+import Destaques from "../../components/Destaques";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -77,9 +78,11 @@ export default function Home({ navigation }) {
   const { armazenarListaEditora } = useContext(DataContext);
   const [dadosEditora, setDadosEditora] = useState();
   const [loadingLogin, setLoadingLogin] = useState(false);
+  const [livro, setLivro] = useState('');
 
   useEffect(() => {
     getTodasEditoras();
+    getLivro();
   }, []);
 
   const getTodasEditoras = async () => {
@@ -97,10 +100,25 @@ export default function Home({ navigation }) {
       });
   };
 
+  const getLivro = async () => {
+    await AxiosInstance.get("/livros/2", {
+      headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
+    })
+      .then((resultado) => {
+        setLivro(resultado.data);
+      })
+      .catch((error) => {
+        console.log(
+          "Ocorreu um erro ao recuperar os dados: " + error
+        );
+      });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.editorasContainer}>
         <Text style={styles.title}>EDITORAS</Text>
+        <Destaques />
         {loadingLogin ? (
           <ActivityIndicator size={20} color="#FFF" />
         ) : (
@@ -120,9 +138,9 @@ export default function Home({ navigation }) {
       <View style={styles.destaqueContainer}>
         <Text style={styles.recentesContainer.text}>Destaque</Text>
         <CardDestaque
-          urlImage={"https://m.media-amazon.com/images/I/819js3EQwbL.jpg"}
-          title={"1984"}
-          description={"Livro sobre uma distopia"}
+          urlImage={`data:image/png;base64,${livro.img}`}
+          title={livro.nomeLivro}
+          description={livro.descricao}
           rating={DATA_DESTAQUE.rating}
         />
       </View>

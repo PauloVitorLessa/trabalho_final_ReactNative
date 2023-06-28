@@ -27,7 +27,8 @@ export function StackLogin() {
       <Stack.Screen
         name="Home"
         component={TabRoutes}
-        options={{ title: "Livraria G3" }}
+        options={{ title: "Livraria G4",
+        headerLeft: () => null }}
       />
     </Stack.Navigator>
   );
@@ -74,7 +75,8 @@ export function StackHome() {
       <Stack.Screen
         name="Home"
         component={Home}
-        options={{ title: "Livraria G3" }}
+        options={{ title: "Livraria G3",
+        headerLeft: () => null }} 
       />
       <Stack.Screen
         name="Editora"
@@ -104,7 +106,8 @@ export function StackEditoras() {
       <Stack.Screen
         name="Editoras"
         component={HomeEditoras}
-        options={{ title: "Editoras" }}
+        options={{ title: "Editoras",
+        headerLeft: () => null }}
       />
       <Stack.Screen
         name="Editora"

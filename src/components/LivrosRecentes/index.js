@@ -84,30 +84,30 @@ export default function LivrosRecentes({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    //flex: 1,
-    //gap: 4,
-  },
   item: {
-    backgroundColor: "black",
     marginRight: 10,
   },
   title: {
-    margin: 10,
+    marginLeft: 10,
+    marginBottom: 10,
     fontSize: 20,
     fontWeight: "bold",
     color: "white",
-    //flex: 1,
     alignItems: "center",
   },
   tinyLogo: {
-    width: windowWidth / 2 - 70,
-    height: 150,
-    marginBottom: 20,
-    backgroundColor: "black",
+    width: 120,
+    height: 190,
+    borderColor: "#101b1b",
+    borderWidth: 3,
+    //backgroundColor: "green",
     resizeMode: "contain",
+    shadowColor: "#171717",
+    shadowOffset: { width: -3, height: 5 },
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   livros: {
-    margin: 10,
+    marginLeft: 10,
   },
 });
