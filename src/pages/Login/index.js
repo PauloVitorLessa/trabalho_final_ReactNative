@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
@@ -22,6 +23,7 @@ export default function Login({ navigation }) {
   const { armazenarDadosUsuario } = useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [carrinhofromDB, setCarrinhoFromDB] = useState("");
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   const inicializaCarrinho = async (key, value) => {
     await deleteValue("carrinho");
@@ -31,6 +33,7 @@ export default function Login({ navigation }) {
   };
 
   const handleLogin = async () => {
+    setLoadingLogin(true);
     try {
       const resultado = await AxiosInstance.post("/auth/signin", {
         username: email,
@@ -40,6 +43,7 @@ export default function Login({ navigation }) {
       if (resultado.status === 200) {
         var jwtToken = resultado.data;
         armazenarDadosUsuario(jwtToken["accessToken"]);
+        setLoadingLogin(false);
         const carrinho = [
           {
             codigoLivro: "",
@@ -56,6 +60,7 @@ export default function Login({ navigation }) {
       }
     } catch (error) {
       console.log("erro durante o processo de login: " + error);
+      setLoadingLogin(false);
     }
   };
 
@@ -94,7 +99,11 @@ export default function Login({ navigation }) {
         </View>
       </View>
       <TouchableOpacity onPress={handleLogin} style={styles.button}>
-        <Text style={styles.buttonText}>Login</Text>
+        {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" />
+        ) : (
+          <Text style={styles.buttonText}>Login</Text>
+        )}
       </TouchableOpacity>
     </View>
   );
