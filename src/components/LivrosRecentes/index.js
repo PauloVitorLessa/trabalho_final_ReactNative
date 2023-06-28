@@ -21,8 +21,6 @@ const Item = ({ img, nav, item, func }) => (
   <TouchableOpacity
     style={styles.item}
     onPress={() => {
-      console.log("funcao");
-      console.log(func);
       func(item);
       nav.navigate("Livro");
     }}
@@ -37,7 +35,6 @@ const Item = ({ img, nav, item, func }) => (
 );
 
 export default function LivrosRecentes({ navigation }) {
-  console.log(navigation);
   const { dadosUsuario } = useContext(DataContext);
   const { armazenarDadosLivro } = useContext(LivroContext);
 
@@ -54,7 +51,6 @@ export default function LivrosRecentes({ navigation }) {
       { headers: { Authorization: `Bearer ${dadosUsuario?.token}` } }
     )
       .then((resultado) => {
-        console.log("getTodosLivros" + JSON.stringify(resultado.data));
         setDadosLivros(resultado.data);
       })
       .catch((error) => {

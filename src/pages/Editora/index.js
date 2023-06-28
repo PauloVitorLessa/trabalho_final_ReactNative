@@ -24,8 +24,6 @@ const windowHeight = Dimensions.get("window").height;
 const RenderHomeEditora = ({ item, navigation }) => {
   const { armazenarDadosLivro } = useContext(LivroContext);
   const onPressHandler = (livro) => {
-    console.log("dados livro armazenado");
-    console.log(livro);
     armazenarDadosLivro(livro);
     navigation.navigate("Livro");
   };
@@ -40,7 +38,7 @@ const RenderHomeEditora = ({ item, navigation }) => {
           <CardLivroHorizontal
             img={item[0].img}
             title={item[0].title}
-            //description={props.item[0].description}
+            idLivro={item[0].codigoLivro}
           />
         </TouchableOpacity>
       ) : null}
@@ -55,7 +53,7 @@ const RenderHomeEditora = ({ item, navigation }) => {
             <CardLivro
               img={item[1].img}
               title={item[1].title}
-              //description={props.item[1].description}
+              idLivro={item[1].codigoLivro}
             ></CardLivro>
           </TouchableOpacity>
         ) : null}
@@ -68,7 +66,7 @@ const RenderHomeEditora = ({ item, navigation }) => {
             <CardLivro
               img={item[2].img}
               title={item[2].title}
-              //description={props.item[2].description}
+              idLivro={item[2].codigoLivro}
             ></CardLivro>
           </TouchableOpacity>
         ) : null}
@@ -82,7 +80,7 @@ const RenderHomeEditora = ({ item, navigation }) => {
           <CardLivroHorizontal
             img={item[3].img}
             title={item[3].title}
-            //description={props.item[3].description}
+            idLivro={item[3].codigoLivro}
           ></CardLivroHorizontal>
         </TouchableOpacity>
       ) : null}
@@ -95,7 +93,7 @@ const RenderHomeEditora = ({ item, navigation }) => {
           <CardLivroGrande
             img={item[4].img}
             title={item[4].title}
-            //description={props.item[4].description}
+            idLivro={item[4].codigoLivro}
           ></CardLivroGrande>
         </TouchableOpacity>
       ) : null}
@@ -106,8 +104,6 @@ const RenderHomeEditora = ({ item, navigation }) => {
 const generateData = (livrosEditora) => {
   const dataList = [];
   const listaLivros = livrosEditora;
-  console.log("listaLivrosEditora");
-  console.log(listaLivros);
 
   let size = listaLivros.length / 5;
 
@@ -126,8 +122,7 @@ const generateData = (livrosEditora) => {
     dataList.push(data);
     count = count + 5;
   }
-  console.log("datalist");
-  console.log(dataList);
+
   return dataList;
 };
 
@@ -145,7 +140,6 @@ export default function Editora({ navigation }) {
         }
       )
         .then((resultado) => {
-          console.log("GetLivrosEditora:" + resultado.data);
           setLivrosEditora(resultado.data);
         })
         .catch((error) => {

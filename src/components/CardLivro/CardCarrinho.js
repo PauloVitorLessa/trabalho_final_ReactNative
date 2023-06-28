@@ -2,55 +2,54 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
-  FlatList,
   Image,
-  ImageBackground,
   Dimensions,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
-import { Rating } from "react-native-ratings";
-import AxiosInstance from "../../api/AxiosInstance";
-import { DataContext } from "../../context/DataContext";
-import {
-  addCarrinho,
-  getValueFor,
-  deleteValue,
-} from "../../services/DataService";
+import { save, getValueFor, deleteValue } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-//const { rating } = this.props;
+export default function CardCarrinho(props) {
+  const [quantity, setQuantity] = useState(0);
 
-//const CardLivro = ({ urlImage, title, description })
-
-export default function CardLivroHorizontal(props) {
-  const livro = {
-    codigoLivro: props.idLivro,
-    title: props.title,
-    quantidade: 1,
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
   };
 
-  const handleOnPress = async () => {
-    await addCarrinho("carrinho", livro);
-    console.log("apos add carrinho");
-    console.log(await getValueFor("carrinho"));
+  const decrementQuantity = () => {
+    if (quantity > 0) {
+      setQuantity(quantity - 1);
+    }
   };
+
   return (
     <View style={styles.CardLivroHorizontal}>
       <Image
         source={{
-          uri: `data:image/png;base64,${props.img}`,
+          uri: `https://apilivraria-production.up.railway.app/api/livros/img/${props.codigoLivro}`,
         }}
         style={styles.imageCardLivro}
       ></Image>
       <View style={styles.CardBody}>
         <Text style={styles.cardTitle}>{props.title}</Text>
-        <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
-          <FontAwesome name="shopping-cart" size={24} color="white" />
+      </View>
+      <View style={styles.quantityButtons}>
+        <TouchableOpacity
+          style={styles.quantityButton}
+          onPress={decrementQuantity}
+        >
+          <FontAwesome name="minus" size={16} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.quantityText}>{quantity}</Text>
+        <TouchableOpacity
+          style={styles.quantityButton}
+          onPress={incrementQuantity}
+        >
+          <FontAwesome name="plus" size={16} color="white" />
         </TouchableOpacity>
       </View>
     </View>

@@ -5,6 +5,7 @@ import StackRoutes from "./StackRoute";
 
 import Home from "../pages/Home";
 import HomeEditoras from "../pages/HomeEditoras";
+import Carrinho from "../pages/Carrinho/Index";
 
 const Tab = createBottomTabNavigator();
 
@@ -29,6 +30,15 @@ export default function TabRoutes() {
       <Tab.Screen
         name="Editoras"
         component={HomeEditoras}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="local-library" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Carrinho"
+        component={Carrinho}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="local-library" color={color} size={size} />

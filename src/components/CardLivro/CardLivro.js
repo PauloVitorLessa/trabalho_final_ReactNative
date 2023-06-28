@@ -13,11 +13,14 @@ import { useState, useContext, useEffect } from "react";
 import { Rating } from "react-native-ratings";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
+import { FontAwesome } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function CardLivro(props) {
+  const [quantity, setQuantity] = useState(0);
+
   return (
     <View style={styles.CardLivro}>
       <Image
@@ -28,6 +31,9 @@ export default function CardLivro(props) {
       ></Image>
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>{props.title}</Text>
+        <TouchableOpacity style={styles.cartButton}>
+          <FontAwesome name="shopping-cart" size={24} color="white" />
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -64,5 +70,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     alignItems: "center",
+  },
+  cartButton: {
+    backgroundColor: "transparent",
+    margin: 10,
   },
 });

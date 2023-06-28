@@ -9,15 +9,28 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
+import {
+  save,
+  addCarrinho,
+  getValueFor,
+  deleteValue,
+} from "../../services/DataService";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const { armazenarDadosUsuario } = useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
+  const [carrinhofromDB, setCarrinhoFromDB] = useState("");
+
+  const inicializaCarrinho = async (key, value) => {
+    await deleteValue("carrinho");
+    //await save(key, value);
+    // let carrinhoTemp = await getValueFor(key);
+    // setCarrinhoFromDB(await getValueFor(key));
+  };
 
   const handleLogin = async () => {
-    console.log(`E-mail: ${email} - Senha: ${senha}`);
     try {
       const resultado = await AxiosInstance.post("/auth/signin", {
         username: email,
@@ -27,6 +40,15 @@ export default function Login({ navigation }) {
       if (resultado.status === 200) {
         var jwtToken = resultado.data;
         armazenarDadosUsuario(jwtToken["accessToken"]);
+        const carrinho = [
+          {
+            codigoLivro: "",
+            img: "",
+            title: "",
+            quantidade: 0,
+          },
+        ];
+        inicializaCarrinho("carrinho", carrinho);
 
         navigation.navigate("TabRoutes");
       } else {

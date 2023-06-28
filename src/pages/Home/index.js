@@ -14,6 +14,11 @@ import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { EditoraContext } from "../../context/EditoraContext";
 import LivrosRecentes from "../../components/LivrosRecentes";
+import {
+  addCarrinho,
+  getValueFor,
+  deleteValue,
+} from "../../services/DataService";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
@@ -28,8 +33,6 @@ const DATA_DESTAQUE = {
 };
 
 const Editora = ({ item, navigation }) => {
-  console.log("editora:");
-  console.log(navigation);
   const { armazenarDadosEditora } = useContext(EditoraContext);
   const onPressHandler = () => {
     armazenarDadosEditora(item);
@@ -83,7 +86,6 @@ export default function Home({ navigation }) {
       headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
     })
       .then((resultado) => {
-        console.log("GetTodasEditoras:" + resultado.data);
         setDadosEditora(resultado.data);
         armazenarListaEditora(resultado.data);
       })
