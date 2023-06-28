@@ -51,7 +51,16 @@ export default function TabRoutes() {
         component={Carrinho}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="local-library" color={color} size={size} />
+            <MaterialIcons name="shopping-cart" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Sair"
+        component={''}
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="logout" color={color} size={size} />
           ),
         }}
       />
