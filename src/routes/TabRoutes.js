@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import StackRoutes from "./StackRoute";
+import { StackCarrinho, StackEditoras, StackHome } from "./StackRoute";
 
 //import Home from "../pages/Home";
 import Login from "../pages/Login";
@@ -20,17 +20,8 @@ export default function TabRoutes() {
       }}
     >
       <Tab.Screen
-        name="Login"
-        component={Login}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="StackRoutes"
-        component={StackRoutes}
+        name="Home"
+        component={StackHome}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" color={color} size={size} />
@@ -39,7 +30,7 @@ export default function TabRoutes() {
       />
       <Tab.Screen
         name="Editoras"
-        component={HomeEditoras}
+        component={StackEditoras}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="local-library" color={color} size={size} />
@@ -48,8 +39,9 @@ export default function TabRoutes() {
       />
       <Tab.Screen
         name="Carrinho"
-        component={Carrinho}
+        component={StackCarrinho}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="shopping-cart" color={color} size={size} />
           ),
@@ -57,7 +49,7 @@ export default function TabRoutes() {
       />
       <Tab.Screen
         name="Sair"
-        component={''}
+        component={""}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="logout" color={color} size={size} />

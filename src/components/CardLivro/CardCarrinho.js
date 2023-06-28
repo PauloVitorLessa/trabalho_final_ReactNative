@@ -21,7 +21,7 @@ export default function CardCarrinho(props) {
   };
 
   const decrementQuantity = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -38,18 +38,12 @@ export default function CardCarrinho(props) {
         <Text style={styles.cardTitle}>{props.title}</Text>
       </View>
       <View style={styles.quantityButtons}>
-        <TouchableOpacity
-          style={styles.quantityButton}
-          onPress={decrementQuantity}
-        >
-          <FontAwesome name="minus" size={16} color="white" />
-        </TouchableOpacity>
-        <Text style={styles.quantityText}>{quantity}</Text>
-        <TouchableOpacity
-          style={styles.quantityButton}
-          onPress={incrementQuantity}
-        >
+        <TouchableOpacity onPress={incrementQuantity}>
           <FontAwesome name="plus" size={16} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.cardTitle}>{quantity}</Text>
+        <TouchableOpacity onPress={decrementQuantity}>
+          <FontAwesome name="minus" size={16} color="white" />
         </TouchableOpacity>
       </View>
     </View>
@@ -58,9 +52,9 @@ export default function CardCarrinho(props) {
 
 const styles = StyleSheet.create({
   imageCardLivro: {
-    width: windowWidth / 2 - 5,
-    height: 120,
-    resizeMode: "cover",
+    width: windowWidth / 4.6,
+    height: 100,
+    resizeMode: "contain",
   },
 
   CardLivroHorizontal: {
@@ -72,18 +66,26 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 5,
     width: windowWidth - 10,
+    justifyContent: "space-evenly",
   },
   cardTitle: {
     color: "white",
     fontSize: 16,
-    textAlign: "left",
     borderRadius: 10,
-    paddingLeft: 3,
+    paddingLeft: 1.5,
+    paddingBottom: 13,
+    paddingTop: 15,
   },
   CardBody: {
     justifyContent: "center",
     padding: 3,
-    width: windowWidth / 2 - 5,
+    width: windowWidth / 4,
     alignItems: "center",
   },
+  quantityButtons: {
+    width: windowWidth / 6,
+    justifyContent: "center",
+  },
 });
+
+//"#2D2033",

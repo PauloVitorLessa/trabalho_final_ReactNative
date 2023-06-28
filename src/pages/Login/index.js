@@ -55,7 +55,7 @@ export default function Login({ navigation }) {
         ];
         inicializaCarrinho("carrinho", carrinho);
 
-        navigation.navigate("StackRoutes");
+        navigation.navigate("Home");
       } else {
         console.log("Erro ao realizar o login");
       }
@@ -174,9 +174,9 @@ const styles = StyleSheet.create({
   logo: {
     width: 150,
     height: 150,
-    shadowColor: '#171717',
-    shadowOffset: {width: -3, height: 5},
+    shadowColor: "#171717",
+    shadowOffset: { width: -3, height: 5 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-  }
+  },
 });

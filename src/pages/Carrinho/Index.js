@@ -10,6 +10,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import { RadioButton } from "react-native-paper";
 
 import { FontAwesome } from "@expo/vector-icons";
 import CardLivroHorizontal from "../../components/CardLivro/CardLivroHorizontal";
@@ -19,8 +20,9 @@ import CardCarrinho from "../../components/CardLivro/CardCarrinho";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-export default function Carrinho() {
+export default function Carrinho({ navigation }) {
   const [livrosCarrinhoDB, setLivrosCarrinhoDB] = useState([]);
+  const [checked, setChecked] = React.useState("first");
 
   useFocusEffect(
     React.useCallback(() => {
@@ -30,34 +32,24 @@ export default function Carrinho() {
       })();
     }, [])
   );
+  const handleButton = async () => {
+    await deleteValue("carrinho");
 
-  // useEffect(() => {
-  //   console.log("carregou carrinho:");
-  //   (async () => {
-  //     const livrosCarrinho = await getValueFor("carrinho");
-  //     setLivrosCarrinhoDB(livrosCarrinho);
-  //   })();
-  //   //getCarrinhoFromDB().then((livros) => setLivrosCarrinhoDB(livros));
-  // }, []);
-
-  const getCarrinhoFromDB = async () => {
-    await getValueFor("carrinho");
-    //const livrosCarrinho = await getValueFor("carrinho");
-    //setLivrosCarrinhoDB(livrosCarrinho);
+    navigation.navigate("PedidoFinalizado");
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
         <View>
-          <Text>Produtos</Text>
-          <Text>Carrinho</Text>
+          <Text style={styles.cardTitle}>Carrinho</Text>
+          <Text style={styles.text}>Produtos</Text>
         </View>
         <TouchableOpacity style={styles.trashButton}>
           <FontAwesome name="trash" size={24} color="white" />
         </TouchableOpacity>
       </View>
-      <View>
+      <View style={styles.flatlist}>
         <FlatList
           data={livrosCarrinhoDB}
           renderItem={({ item }) => (
@@ -70,6 +62,38 @@ export default function Carrinho() {
           keyExtractor={(item) => item.codigoLivro}
         />
       </View>
+      <View style={styles.total}>
+        <Text style={styles.text}>Total</Text>
+        <Text style={styles.text}>Grátis</Text>
+      </View>
+      <Text style={styles.cardTitle}>Pagamento</Text>
+      <View style={styles.pagamento}>
+        <View>
+          <View style={styles.pix}>
+            <FontAwesome name="money" size={28} color="white" />
+            <Text style={styles.text}>Pix</Text>
+          </View>
+          <View style={styles.cartao}>
+            <FontAwesome name="credit-card-alt" size={24} color="white" />
+            <Text style={styles.text}>Cartão de Credito</Text>
+          </View>
+        </View>
+        <View>
+          <RadioButton
+            value="first"
+            status={checked === "first" ? "checked" : "unchecked"}
+            onPress={() => setChecked("first")}
+          />
+          <RadioButton
+            value="second"
+            status={checked === "second" ? "checked" : "unchecked"}
+            onPress={() => setChecked("second")}
+          />
+        </View>
+      </View>
+      <TouchableOpacity onPress={handleButton} style={styles.button}>
+        <Text style={styles.buttonText}>Finalizar Compra</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -78,6 +102,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "black",
     flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   cardInfo: {
     width: windowWidth / 2 - 10,
@@ -86,9 +112,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   cardTitle: {
-    fontSize: 20,
+    fontSize: 25,
     color: "white",
-    textAlign: "center",
+    marginBottom: 10,
+  },
+  text: {
+    fontSize: 15,
+    color: "white",
+    marginBottom: 10,
   },
   cardDescription: {
     //fontSize: 20,
@@ -102,9 +133,9 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   content: {
-    marginTop: 40,
+    marginTop: 20,
     flexDirection: "row",
-    alignSelf: "center",
+    justifyContent: "space-between",
   },
   botao: {
     marginTop: 20,
@@ -114,5 +145,50 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     backgroundColor: "green",
     borderRadius: 5,
+  },
+  trashButton: {
+    alignSelf: "flex-end",
+    marginBottom: 10,
+  },
+  flatlist: {
+    height: 290,
+    borderBottomColor: "white",
+    borderBottomWidth: 2,
+    borderTopColor: "white",
+    borderTopWidth: 2,
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
+  total: {
+    paddingBottom: 20,
+    paddingTop: 20,
+    borderBottomColor: "white",
+    borderBottomWidth: 2,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  pagamento: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  pix: {
+    marginTop: 5,
+    flexDirection: "row",
+    gap: 10,
+  },
+  cartao: {
+    marginTop: 5,
+    flexDirection: "row",
+    gap: 10,
+  },
+  button: {
+    backgroundColor: "#f95c47",
+    marginTop: 10,
+    width: 270,
+    height: 40,
+    borderRadius: 5,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
 });
