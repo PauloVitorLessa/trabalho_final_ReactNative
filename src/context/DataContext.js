@@ -7,6 +7,11 @@ export const DataContext = createContext({});
 export const DataProvider = ({ children }) => {
   const [dadosUsuario, setDadosUsuario] = useState("");
   const [listaEditoras, setListaEditoras] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const limpaDadosUsuario = () => {
+    setDadosUsuario("");
+  };
 
   const armazenarDadosUsuario = (jwt) => {
     var jwtDecodificado = jwt_decode(jwt);
@@ -21,6 +26,7 @@ export const DataProvider = ({ children }) => {
       email: usuario?.email,
       token: jwt,
     });
+    setLoading(false);
   };
 
   const armazenarListaEditora = (lista) => {
@@ -34,6 +40,9 @@ export const DataProvider = ({ children }) => {
         armazenarDadosUsuario,
         listaEditoras,
         armazenarListaEditora,
+        limpaDadosUsuario,
+        loading,
+        setLoading,
       }}
     >
       {children}

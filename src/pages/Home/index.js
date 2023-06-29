@@ -31,7 +31,7 @@ const Editora = ({ item, navigation }) => {
   const { armazenarDadosEditora } = useContext(EditoraContext);
   const onPressHandler = () => {
     armazenarDadosEditora(item);
-    navigation.navigate("Editora");
+    navigation.navigate("EditoraStack");
   };
   return (
     <View style={styles.item}>

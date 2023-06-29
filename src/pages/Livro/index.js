@@ -9,6 +9,12 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
+import {
+  save,
+  getValueFor,
+  deleteValue,
+  addCarrinho,
+} from "../../services/DataService";
 import { DataContext } from "../../context/DataContext";
 import { LivroContext } from "../../context/LivroContext";
 
@@ -18,8 +24,17 @@ const windowHeight = Dimensions.get("window").height;
 export default function Livro() {
   const { dadosUsuario } = useContext(DataContext);
   const { dadosLivro } = useContext(LivroContext);
-  console.log(dadosLivro);
 
+  const livro = {
+    codigoLivro: dadosLivro.codigoLivro,
+    title: dadosLivro.title,
+    quantidade: 1,
+  };
+  const handleOnPress = async () => {
+    await addCarrinho("carrinho", livro);
+    console.log("apos add carrinho");
+    console.log(await getValueFor("carrinho"));
+  };
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -33,7 +48,7 @@ export default function Livro() {
         <View style={styles.cardInfo}>
           <Text style={styles.cardTitle}>{dadosLivro.title}</Text>
           <Text style={styles.cardDescription}>{dadosLivro.descricao}</Text>
-          <TouchableOpacity style={styles.botao}>
+          <TouchableOpacity style={styles.botao} onPress={handleOnPress}>
             <Text style={styles.cardTitle}>COMPRAR</Text>
           </TouchableOpacity>
         </View>
