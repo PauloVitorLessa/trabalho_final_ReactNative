@@ -24,6 +24,7 @@ export default function Login({ navigation }) {
     limpaDadosUsuario,
     setLoading,
     setQtdFavoritos,
+    setQtdCarrinho,
   } = useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
@@ -36,6 +37,7 @@ export default function Login({ navigation }) {
 
   const inicializaCarrinho = async (key, value) => {
     await deleteValue("carrinho");
+    setQtdCarrinho(0);
     let favoritos = [];
     try {
       getValueFor("favoritos").then((result) => {
