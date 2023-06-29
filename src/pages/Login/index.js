@@ -12,25 +12,14 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
-import {
-  save,
-  addCarrinho,
-  getValueFor,
-  deleteValue,
-} from "../../services/DataService";
+import { deleteValue } from "../../services/DataService";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const {
-    armazenarDadosUsuario,
-    limpaDadosUsuario,
-    dadosUsuario,
-    loading,
-    setLoading,
-  } = useContext(DataContext);
+  const { armazenarDadosUsuario, limpaDadosUsuario, setLoading } =
+    useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
-  const [carrinhofromDB, setCarrinhoFromDB] = useState("");
   const [loadingLogin, setLoadingLogin] = useState(false);
 
   useFocusEffect(
@@ -65,8 +54,6 @@ export default function Login({ navigation }) {
           },
         ];
         inicializaCarrinho("carrinho", carrinho);
-
-        //navigation.navigate("Home");
       } else {
         console.log("Erro ao realizar o login");
       }
@@ -105,7 +92,7 @@ export default function Login({ navigation }) {
           >
             <Ionicons
               name={mostrarSenha ? "eye-off" : "eye"}
-              size={20} // Alterei o tamanho do ícone para 20
+              size={20}
               color="black"
             />
           </TouchableOpacity>
@@ -167,7 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   showPasswordButton: {
-    padding: 2, // Reduzi o tamanho do padding
+    padding: 2,
   },
   button: {
     backgroundColor: "#f95c47",

@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react";
 import jwt_decode from "jwt-decode";
 
-//contexto
 export const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {

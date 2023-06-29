@@ -1,5 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import TabRoutes from "./TabRoutes";
 import { StackLogin } from "./StackRoute";
 import { DataContext } from "../context/DataContext";
@@ -18,10 +18,3 @@ export default function Routes() {
     </NavigationContainer>
   );
 }
-
-//   return (
-//     <NavigationContainer>
-//       <StackLogin />
-//     </NavigationContainer>
-//   );
-// }

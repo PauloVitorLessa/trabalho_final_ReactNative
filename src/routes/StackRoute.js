@@ -43,7 +43,11 @@ export function StackCarrinho() {
       <Stack.Screen
         name="carrinhoStack"
         component={Carrinho}
-        options={{ headerShown: true, headerLeft: () => null }}
+        options={{
+          headerShown: true,
+          headerLeft: () => null,
+          title: "Carrinho",
+        }}
       />
       <Stack.Screen
         name="PedidoFinalizado"

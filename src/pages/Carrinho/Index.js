@@ -1,24 +1,22 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import {
   Text,
   View,
   FlatList,
   StyleSheet,
-  Image,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
 import { RadioButton } from "react-native-paper";
 
 import { FontAwesome } from "@expo/vector-icons";
-import CardLivroHorizontal from "../../components/CardLivro/CardLivroHorizontal";
 import { save, getValueFor, deleteValue } from "../../services/DataService";
 import CardCarrinho from "../../components/CardLivro/CardCarrinho";
 
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+//const windowHeight = Dimensions.get("window").height;
 
 export default function Carrinho({ navigation }) {
   const [livrosCarrinhoDB, setLivrosCarrinhoDB] = useState([]);
@@ -165,7 +163,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   cardDescription: {
-    //fontSize: 20,
     color: "white",
     textAlign: "center",
     marginTop: 20,
@@ -186,7 +183,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: "green",
+    backgroundColor: "#F95C47",
     borderRadius: 5,
   },
   trashButton: {
@@ -240,5 +237,5 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: "bold",
     color: "black",
-  }
+  },
 });

@@ -1,28 +1,23 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
+import { useContext } from "react";
 import {
   Text,
   View,
-  FlatList,
   StyleSheet,
   Image,
   Dimensions,
   TouchableOpacity,
 } from "react-native";
 import {
-  save,
   getValueFor,
-  deleteValue,
   addCarrinho,
 } from "../../services/DataService";
-import { DataContext } from "../../context/DataContext";
 import { LivroContext } from "../../context/LivroContext";
 
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
 export default function Livro() {
-  const { dadosUsuario } = useContext(DataContext);
   const { dadosLivro } = useContext(LivroContext);
 
   const livro = {
@@ -74,7 +69,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   cardDescription: {
-    //fontSize: 20,
     color: "white",
     textAlign: "center",
     marginTop: 20,
@@ -95,7 +89,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
-    backgroundColor: "green",
+    backgroundColor: "#F95C47",
     borderRadius: 5,
   },
 });

@@ -18,15 +18,6 @@ import LivrosRecentes from "../../components/LivrosRecentes";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 
-const DATA_DESTAQUE = {
-  id: "1",
-  urlImg:
-    "https://images.pexels.com/photos/17054024/pexels-photo-17054024/free-photo-of-agricultura-colheita-safra-terra-cultivada.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-  title: "image 1",
-  description: "description 1",
-  rating: 5,
-};
-
 const Editora = ({ item, navigation }) => {
   const { armazenarDadosEditora } = useContext(EditoraContext);
   const onPressHandler = () => {
@@ -120,7 +111,6 @@ export default function Home({ navigation }) {
           <ActivityIndicator size={20} color="#FFF" />
         ) : (
           <FlatList
-            //disableScrollViewPanResponder
             horizontal={true}
             data={dadosEditora}
             renderItem={({ item }) => (
@@ -151,7 +141,6 @@ export default function Home({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    //alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#696462",
     flex: 1,
@@ -159,13 +148,8 @@ const styles = StyleSheet.create({
   editorasContainer: {
     margin: 10,
   },
-
   recentesContainer: {
-    //alignItems: "flex-start",
-
     backgroundColor: "black",
-    //flex: 0.6,
-
     text: {
       color: "white",
       fontSize: 20,
@@ -176,7 +160,6 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     marginBottom: 10,
   },
-
   text: {
     color: "white",
     fontSize: 20,
@@ -199,7 +182,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingLeft: 3,
   },
-
   input: {
     backgroundColor: "white",
     marginBottom: 20,
@@ -207,7 +189,6 @@ const styles = StyleSheet.create({
     padding: 4,
     width: 200,
   },
-
   button: {
     backgroundColor: "white",
     marginTop: 10,
@@ -216,9 +197,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "green",
+    backgroundColor: "#F95C47",
   },
-
   buttonText: {
     color: "white",
   },
@@ -270,7 +250,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   CardDestaque: {
-    // backgroundColor: "white",
     borderColor: "black",
     paddingBottom: 3,
     marginTop: 3,
@@ -285,9 +264,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   rating: {
-    //flex: 1,
     alignItems: "center",
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   tinyLogo: {
     borderRadius: 100,
@@ -295,9 +273,9 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
-divDestaque: {
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center"
-}
+  divDestaque: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });

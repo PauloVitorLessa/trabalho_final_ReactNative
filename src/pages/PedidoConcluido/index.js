@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { StyleSheet, Text, Image, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 export default function PedidoConcluido({ navigation }) {
   return (
@@ -23,7 +22,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     margin: 30,
   },
-
   logo: {
     width: 150,
     height: 150,

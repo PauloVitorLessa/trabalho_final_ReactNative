@@ -1,12 +1,8 @@
 import {
   StyleSheet,
-  Text,
   View,
-  TextInput,
   TouchableOpacity,
   FlatList,
-  Image,
-  ImageBackground,
   Dimensions,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
@@ -171,10 +167,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#696462",
-    //padding: 10, // Aumentei a margem para 10
     flex: 1,
   },
-
   flexDirectionRow: {
     flexDirection: "row",
     justifyContent: "center",

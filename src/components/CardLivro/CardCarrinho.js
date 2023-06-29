@@ -8,17 +8,12 @@ import {
 } from "react-native";
 import React from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { useState, useContext, useEffect } from "react";
-import {
-  save,
-  getValueFor,
-  deleteValue,
-  addCarrinho,
-} from "../../services/DataService";
+import { useState } from "react";
+import { getValueFor, addCarrinho } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+//const windowHeight = Dimensions.get("window").height;
 
 export default function CardCarrinho(props) {
   const [quantity, setQuantity] = useState(0);
@@ -97,10 +92,7 @@ const styles = StyleSheet.create({
     height: 100,
     resizeMode: "contain",
   },
-
   CardLivroHorizontal: {
-    //backgroundColor: "#2D2033",
-
     paddingBottom: 0,
     flexDirection: "row",
     marginBottom: 5,
@@ -127,5 +119,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-//"#2D2033",

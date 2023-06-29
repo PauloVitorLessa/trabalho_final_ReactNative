@@ -2,26 +2,15 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
-  FlatList,
   Image,
-  ImageBackground,
   Dimensions,
 } from "react-native";
-import { useState, useContext, useEffect } from "react";
-import { Rating } from "react-native-ratings";
-import AxiosInstance from "../../api/AxiosInstance";
-import { DataContext } from "../../context/DataContext";
-import {
-  addCarrinho,
-  getValueFor,
-  deleteValue,
-} from "../../services/DataService";
+import { addCarrinho, getValueFor } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
+//const windowHeight = Dimensions.get("window").height;
 
 export default function CardLivroGrande(props) {
   const livro = {
@@ -46,8 +35,9 @@ export default function CardLivroGrande(props) {
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>{props.title}</Text>
         <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
-          <Text style={styles.btnComprar}>COMPRAR
-            <FontAwesome name="shopping-cart" size={20} color="white" />
+          <Text style={styles.btnComprar}>
+            COMPRAR
+            <FontAwesome name="shopping-cart" size={16} color="white" />
           </Text>
         </TouchableOpacity>
       </View>
@@ -66,13 +56,11 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     textAlign: "center",
   },
-
   imageCardLivro: {
     width: windowWidth - 10,
     height: 170,
     resizeMode: "cover",
   },
-
   CardLivroGrande: {
     backgroundColor: "#2D2033",
     borderColor: "black",
@@ -82,7 +70,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
     width: windowWidth - 10,
-    //height: 210,
   },
   cardInfo: {
     justifyContent: "center",
@@ -92,15 +79,15 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   btnComprar: {
-    backgroundColor: "green",
+    backgroundColor: "#F95C47",
     marginTop: 5,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 5,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  }
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 13,
+  },
 });

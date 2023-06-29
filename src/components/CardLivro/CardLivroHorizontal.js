@@ -2,30 +2,15 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   TouchableOpacity,
-  FlatList,
   Image,
-  ImageBackground,
   Dimensions,
 } from "react-native";
-import { useState, useContext, useEffect } from "react";
-import { Rating } from "react-native-ratings";
-import AxiosInstance from "../../api/AxiosInstance";
-import { DataContext } from "../../context/DataContext";
-import {
-  addCarrinho,
-  getValueFor,
-  deleteValue,
-} from "../../services/DataService";
+import { addCarrinho, getValueFor } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 
 const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
-
-//const { rating } = this.props;
-
-//const CardLivro = ({ urlImage, title, description })
+//const windowHeight = Dimensions.get("window").height;
 
 export default function CardLivroHorizontal(props) {
   const livro = {
@@ -50,8 +35,9 @@ export default function CardLivroHorizontal(props) {
       <View style={styles.CardBody}>
         <Text style={styles.cardTitle}>{props.title}</Text>
         <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
-          <Text style={styles.btnComprar}>COMPRAR
-            <FontAwesome name="shopping-cart" size={20} color="white" />
+          <Text style={styles.btnComprar}>
+            COMPRAR
+            <FontAwesome name="shopping-cart" size={16} color="white" />
           </Text>
         </TouchableOpacity>
       </View>
@@ -65,7 +51,6 @@ const styles = StyleSheet.create({
     height: 120,
     resizeMode: "cover",
   },
-
   CardLivroHorizontal: {
     backgroundColor: "#2D2033",
     borderColor: "black",
@@ -90,15 +75,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   btnComprar: {
-    backgroundColor: "green",
+    backgroundColor: "#F95C47",
     marginTop: 5,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
     paddingRight: 10,
     borderRadius: 5,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  }
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 13,
+  },
 });

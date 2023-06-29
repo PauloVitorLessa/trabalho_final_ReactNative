@@ -1,21 +1,21 @@
 import React from "react";
-import { useContext, useState, useEffect } from "react";
-import { Text, View, FlatList, StyleSheet, Image } from "react-native";
+import { useContext, useState } from "react";
+import { View, FlatList, StyleSheet, Image, ActivityIndicator } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { DataContext } from "../../context/DataContext";
-import AxiosInstance from "../../api/AxiosInstance";
 import { EditoraContext } from "../../context/EditoraContext";
 
 export default function HomeEditoras({ navigation }) {
   const { armazenarDadosEditora } = useContext(EditoraContext);
-  const { dadosUsuario } = useContext(DataContext);
   const { listaEditoras } = useContext(DataContext);
-  const [dadosEditora, setDadosEditora] = useState("");
+  const [loadingLogin, setLoadingLogin] = useState(false);
   const Item = ({ img, item }) => (
     <TouchableOpacity
       onPress={() => {
+        setLoadingLogin(true);
         armazenarDadosEditora(item);
         navigation.navigate("Editora");
+        setLoadingLogin(false);
       }}
     >
       <Image
@@ -29,14 +29,18 @@ export default function HomeEditoras({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        numColumns={2}
-        data={listaEditoras}
-        renderItem={({ item }) => (
-          <Item img={item.img} nome={item.nomeEditora} item={item} />
+      {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" />
+        ) : (
+          <FlatList
+            numColumns={2}
+            data={listaEditoras}
+            renderItem={({ item }) => (
+              <Item img={item.img} nome={item.nomeEditora} item={item} />
+            )}
+            keyExtractor={(item) => item.codigoEditora}
+          />
         )}
-        keyExtractor={(item) => item.codigoEditora}
-      />
     </View>
   );
 }

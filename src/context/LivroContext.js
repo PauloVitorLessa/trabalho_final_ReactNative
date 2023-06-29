@@ -1,6 +1,5 @@
 import React, { createContext, useState } from "react";
 
-//contexto
 export const LivroContext = createContext({});
 
 export const LivroProvider = ({ children }) => {

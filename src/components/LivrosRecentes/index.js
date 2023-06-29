@@ -90,7 +90,7 @@ export default function LivrosRecentes({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container:{
+  container: {
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -114,9 +114,6 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 100,
     height: 150,
-    //borderColor: "#101b1b",
-    // borderWidth: 3,
-    //backgroundColor: "green",
     resizeMode: "contain",
     shadowColor: "#171717",
     shadowOffset: { width: -3, height: 5 },
