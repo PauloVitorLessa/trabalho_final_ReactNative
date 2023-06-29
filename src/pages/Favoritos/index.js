@@ -105,6 +105,10 @@ export default function Favoritos({ navigation }) {
           keyExtractor={(item) => item.codigoLivro}
         />
       </View>
+      <View style={styles.total}>
+        <Text style={styles.textTotal}>Total</Text>
+        <Text style={styles.textTotal}>{qtdFavoritos}</Text>
+      </View>
     </View>
   );
 }
@@ -131,6 +135,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: "white",
     marginBottom: 10,
+  },
+  textTotal: {
+    fontSize: 15,
+    color: "white",
   },
   cardDescription: {
     color: "white",
@@ -161,8 +169,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   flatlistContainer: {
-    height: 300,
-    borderBottomColor: "black",
+    height: 350,
+    borderBottomColor: "white",
     borderBottomWidth: 2,
     borderTopColor: "white",
     borderTopWidth: 2,
@@ -176,6 +184,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
   },
   pagamento: {
     flexDirection: "row",

@@ -7,7 +7,7 @@ import PedidoConcluido from "../pages/PedidoConcluido";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Carrinho from "../pages/Carrinho/Index";
-import Favoritos from "../pages/Favoritos";
+import Favoritos from "../pages/Favoritos/Index";
 import { useContext } from "react";
 import { EditoraContext } from "../context/EditoraContext";
 

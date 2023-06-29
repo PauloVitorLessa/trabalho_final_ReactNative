@@ -14,12 +14,17 @@ import { Ionicons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { deleteValue } from "../../services/DataService";
+import { getValueFor } from "../../services/DataService";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { armazenarDadosUsuario, limpaDadosUsuario, setLoading } =
-    useContext(DataContext);
+  const {
+    armazenarDadosUsuario,
+    limpaDadosUsuario,
+    setLoading,
+    setQtdFavoritos,
+  } = useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
 
@@ -31,6 +36,15 @@ export default function Login({ navigation }) {
 
   const inicializaCarrinho = async (key, value) => {
     await deleteValue("carrinho");
+    let favoritos = [];
+    try {
+      getValueFor("favoritos").then((result) => {
+        favoritos = result;
+        setQtdFavoritos(favoritos.length);
+      });
+    } catch (error) {
+      console.log("erro ao recuperar dados:" + error);
+    }
   };
 
   const handleLogin = async () => {
@@ -61,7 +75,10 @@ export default function Login({ navigation }) {
     } catch (error) {
       setLoadingLogin(false);
       setLoading(false);
-      Alert.alert('Grupo 3 Informa.' ,'Email ou senha inválidos ou não informados! 😢')
+      Alert.alert(
+        "Grupo 3 Informa.",
+        "Email ou senha inválidos ou não informados! 😢"
+      );
       console.log("erro durante o processo de login: " + error);
     }
   };
@@ -74,7 +91,7 @@ export default function Login({ navigation }) {
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/logo.png")} />
       <Text style={styles.text}>Bem-vindo(a)</Text>
-           
+
       <TextInput
         onChangeText={setEmail}
         value={email}

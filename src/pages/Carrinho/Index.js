@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   flatlist: {
-    height: 290,
+    height: 210,
     borderBottomColor: "white",
     borderBottomWidth: 2,
     borderTopColor: "white",
