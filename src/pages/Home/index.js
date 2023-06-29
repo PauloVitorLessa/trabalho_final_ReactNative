@@ -9,7 +9,7 @@ import {
   Dimensions,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
-import { Rating } from "react-native-ratings";
+import { MaterialIcons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { EditoraContext } from "../../context/EditoraContext";
@@ -59,7 +59,7 @@ const CardDestaque = ({ urlImage, title, description, rating }) => (
       <View>
         <Text style={styles.cardTitle}>{title}</Text>
         <Text style={styles.cardDescription}>{description}</Text>
-        <Rating startingValue={4} readonly imageSize={20} />
+        <MaterialIcons name="star" color="black" size={30} />
       </View>
       <View style={styles.rating}></View>
     </View>
@@ -128,13 +128,17 @@ export default function Home({ navigation }) {
       {/* Chama do card de Livros Recentes */}
       <LivrosRecentes navigation={navigation} />
       <View style={styles.destaqueContainer}>
-        <Text style={styles.recentesContainer.text}>Destaque</Text>
-        <CardDestaque
-          urlImage={`data:image/png;base64,${livro.img}`}
-          title={livro.nomeLivro}
-          description={livro.descricao}
-          rating={DATA_DESTAQUE.rating}
-        />
+        <Text style={styles.titleDestaque}>DESTAQUES</Text>
+        {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" />
+        ) : (
+          <CardDestaque
+            urlImage={`data:image/png;base64,${livro.img}`}
+            title={livro.nomeLivro}
+            description={livro.descricao}
+            rating={MaterialIcons}
+          />
+        )}
       </View>
     </View>
   );
@@ -163,15 +167,9 @@ const styles = StyleSheet.create({
     },
   },
   destaqueContainer: {
-    //alignItems: "flex-start",
-
     backgroundColor: "#696462",
-    //flex: 1,
-
-    text: {
-      color: "white",
-      fontSize: 20,
-    },
+    borderRadius: 100,
+    marginBottom: 10,
   },
 
   text: {
@@ -232,6 +230,14 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     marginTop: 10,
   },
+  titleDestaque: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "white",
+    paddingLeft: 10,
+    paddingBottom: 10,
+    marginTop: 10,
+  },
   imageEditora: {
     width: 70,
     height: 70,
@@ -265,15 +271,16 @@ const styles = StyleSheet.create({
     marginTop: 3,
     paddingLeft: 10,
     paddingRight: 10,
+    borderRadius: 20,
   },
   destaqueBodyContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "aliceblue",
-    height: 300,
+    backgroundColor: "#fff8f7",
+    paddingBottom: 20,
   },
   rating: {
-    padding: 10,
+    margin: 10,
   },
   tinyLogo: {
     borderRadius: 100,

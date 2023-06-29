@@ -64,10 +64,10 @@ export function StackHome() {
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "#696462",
-          height: 60,
+          backgroundColor: "#fff8f7",
+          height: 80,
         },
-        headerTintColor: "white",
+        headerTintColor: "black",
       }}
     >
       <Stack.Screen
