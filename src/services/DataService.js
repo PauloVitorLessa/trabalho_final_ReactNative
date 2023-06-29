@@ -31,13 +31,14 @@ export async function deleteValue(key) {
 }
 
 export async function addItem(key, value) {
+  let existente = false;
   try {
     let resultArray = [];
     let result = await SecureStore.getItemAsync(key);
 
     if (result) {
       resultArray = JSON.parse(result);
-      let existente = false;
+
       resultArray.forEach((element) => {
         if (element.codigoLivro === value.codigoLivro) {
           element.quantidade = element.quantidade + value.quantidade;
@@ -54,6 +55,7 @@ export async function addItem(key, value) {
       resultArray.push(value);
       await SecureStore.setItemAsync(key, JSON.stringify(resultArray));
     }
+    return existente;
   } catch (error) {
     console.log("erro ao persistir dados no addItem:" + error);
   }

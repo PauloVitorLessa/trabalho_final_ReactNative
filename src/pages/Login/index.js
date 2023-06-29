@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   labelError: {
-    alignSelf: 'flex-start',
-    color: '#ff375b',
+    alignSelf: "flex-start",
+    color: "#ff375b",
     marginBottom: 8,
-  }
+  },
 });
