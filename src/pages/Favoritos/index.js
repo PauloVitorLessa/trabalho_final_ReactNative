@@ -83,7 +83,7 @@ export default function Favoritos({ navigation }) {
           <FontAwesome name="trash" size={24} color="white" />
         </TouchableOpacity>
       </View>
-      <View style={styles.flatlist}>
+      <View style={styles.flatlistContainer}>
         <FlatList
           data={livrosFavoritosDB}
           renderItem={({ item }) => (
@@ -160,9 +160,9 @@ const styles = StyleSheet.create({
     alignSelf: "flex-end",
     marginBottom: 10,
   },
-  flatlist: {
-    height: 290,
-    borderBottomColor: "white",
+  flatlistContainer: {
+    height: 300,
+    borderBottomColor: "black",
     borderBottomWidth: 2,
     borderTopColor: "white",
     borderTopWidth: 2,
