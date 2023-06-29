@@ -29,7 +29,6 @@ export default function HomeEditoras({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>EDITORAS</Text>
       <FlatList
         numColumns={2}
         data={listaEditoras}
@@ -45,7 +44,7 @@ export default function HomeEditoras({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     justifyContent: "center",
     alignItems: "center",
   },

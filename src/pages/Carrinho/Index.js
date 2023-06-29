@@ -124,11 +124,13 @@ export default function Carrinho({ navigation }) {
             value="first"
             status={checked === "first" ? "checked" : "unchecked"}
             onPress={() => setChecked("first")}
+            color="white"
           />
           <RadioButton
             value="second"
             status={checked === "second" ? "checked" : "unchecked"}
             onPress={() => setChecked("second")}
+            color="white"
           />
         </View>
       </View>
@@ -141,7 +143,7 @@ export default function Carrinho({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     flex: 1,
     paddingLeft: 20,
     paddingRight: 20,
@@ -235,5 +237,8 @@ const styles = StyleSheet.create({
   btnActive: {
     backgroundColor: "#2D2033",
   },
-  btn: {},
+  buttonText: {
+    fontWeight: "bold",
+    color: "black",
+  }
 });

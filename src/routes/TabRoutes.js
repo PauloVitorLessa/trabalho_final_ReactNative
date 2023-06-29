@@ -14,7 +14,7 @@ export default function TabRoutes() {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#696462",
+        tabBarActiveTintColor: "#f95c47",
         tabBarInactiveTintColor: "#4a4645",
         headerShown: false,
       }}
@@ -50,7 +50,7 @@ export default function TabRoutes() {
       />
       <Tab.Screen
         name="Sair"
-        component={""}
+        component={Login}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="logout" color={color} size={size} />

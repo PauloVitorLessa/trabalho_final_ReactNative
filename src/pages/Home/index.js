@@ -56,12 +56,16 @@ const CardDestaque = ({ urlImage, title, description, rating }) => (
       style={styles.imageCardDestaque}
     ></Image>
     <View style={styles.destaqueBodyContainer}>
-      <View>
+      <View style={styles.divDestaque}>
         <Text style={styles.cardTitle}>{title}</Text>
         <Text style={styles.cardDescription}>{description}</Text>
-        <MaterialIcons name="star" color="black" size={30} />
+        <View style={styles.rating}>
+          <MaterialIcons name="star" color="white" size={30} />
+          <MaterialIcons name="star" color="white" size={30} />
+          <MaterialIcons name="star" color="white" size={30} />
+          <MaterialIcons name="star-half" color="white" size={30} />
+        </View>
       </View>
-      <View style={styles.rating}></View>
     </View>
   </View>
 );
@@ -95,7 +99,8 @@ export default function Home({ navigation }) {
   };
 
   const getLivro = async () => {
-    await AxiosInstance.get("/livros/17", {
+    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    await AxiosInstance.get(`/livros/${randomNumber}`, {
       headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
     })
       .then((resultado) => {
@@ -181,14 +186,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   cardTitle: {
-    color: "black",
+    color: "white",
     fontSize: 16,
     textAlign: "center",
     borderRadius: 10,
     paddingLeft: 3,
   },
   cardDescription: {
-    color: "gray",
+    color: "white",
     fontSize: 12,
     textAlign: "left",
     borderRadius: 10,
@@ -276,11 +281,13 @@ const styles = StyleSheet.create({
   destaqueBodyContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    backgroundColor: "#fff8f7",
+    backgroundColor: "#2D2033",
     paddingBottom: 20,
   },
   rating: {
-    margin: 10,
+    //flex: 1,
+    alignItems: "center",
+    flexDirection: 'row'
   },
   tinyLogo: {
     borderRadius: 100,
@@ -288,4 +295,9 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
   },
+divDestaque: {
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center"
+}
 });

@@ -50,7 +50,9 @@ export default function CardLivroHorizontal(props) {
       <View style={styles.CardBody}>
         <Text style={styles.cardTitle}>{props.title}</Text>
         <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
-          <FontAwesome name="shopping-cart" size={24} color="white" />
+          <Text style={styles.btnComprar}>COMPRAR
+            <FontAwesome name="shopping-cart" size={20} color="white" />
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -87,4 +89,16 @@ const styles = StyleSheet.create({
     width: windowWidth / 2 - 5,
     alignItems: "center",
   },
+  btnComprar: {
+    backgroundColor: "green",
+    marginTop: 5,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
+    borderRadius: 5,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }
 });

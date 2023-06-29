@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     //padding: 10, // Aumentei a margem para 10
     flex: 1,
   },

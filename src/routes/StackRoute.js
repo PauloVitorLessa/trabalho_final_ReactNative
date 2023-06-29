@@ -20,9 +20,9 @@ export function StackLogin() {
         headerShown: false,
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "black",
+          backgroundColor: "#fff8f7",
         },
-        headerTintColor: "white",
+        headerTintColor: "black",
       }}
     >
       <Stack.Screen name="Login" component={Login} />
@@ -41,15 +41,15 @@ export function StackCarrinho() {
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "red",
+          backgroundColor: "#fff8f7",
         },
-        headerTintColor: "white",
+        headerTintColor: "black",
       }}
     >
       <Stack.Screen
         name="Carrinho"
         component={Carrinho}
-        options={{ headerShown: false }}
+        options={{ headerShown: true, headerLeft: () => null }}
       />
       <Stack.Screen
         name="PedidoFinalizado"
@@ -103,9 +103,9 @@ export function StackEditoras() {
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: "black",
+          backgroundColor: "#fff8f7",
         },
-        headerTintColor: "white",
+        headerTintColor: "black",
       }}
     >
       <Stack.Screen
