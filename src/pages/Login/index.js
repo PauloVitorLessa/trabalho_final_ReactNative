@@ -15,15 +15,6 @@ import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { deleteValue } from "../../services/DataService";
 
-// import { useForm, Controller } from 'react-hook-form'
-// import { yupResolver } from '@hookform/resolvers/yup'
-// import * as yup from 'yup'
-
-// const Schema = yup.object({
-//   username: yup.string().required("Informe seu email"),
-//   password: yup.string().required("Informe sua senha"),
-// })
-
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -31,9 +22,6 @@ export default function Login({ navigation }) {
     useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [loadingLogin, setLoadingLogin] = useState(false);
-  // const { control, handleSubmit, formState: { errors }} = useForm({
-  //   resolver: yupResolver(Schema)
-  // })
 
   useFocusEffect(
     React.useCallback(() => {
@@ -73,7 +61,7 @@ export default function Login({ navigation }) {
     } catch (error) {
       setLoadingLogin(false);
       setLoading(false);
-      Alert.alert("Email ou Usuário inválidos");
+      Alert.alert('Grupo 3 Informa.' ,'Email ou senha inválidos ou não informados! 😢')
       console.log("erro durante o processo de login: " + error);
     }
   };
@@ -86,43 +74,7 @@ export default function Login({ navigation }) {
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/logo.png")} />
       <Text style={styles.text}>Bem-vindo(a)</Text>
-
-      {/* <Controller 
-        control={control}
-        name="username"
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            style={[styles.input, {
-              borderWidth: errors.username && 1,
-              borderColor: errors.username && '#FF375B',
-            }]}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            value={value}
-            placeholder="digite seu e-mail do hook"
-          />
-        )}
-      />
-      {errors.username && <Text style={styles.labelError}>{errors.username?.message}</Text>}
-      <Controller 
-        control={control}
-        name="password"
-        render={({field: {onChange, onBlur, value}}) => (
-          <TextInput
-            style={[styles.input, {
-              borderWidth: errors.password && 1,
-              borderColor: errors.password && '#FF375B',
-            }]}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            value={value}
-            placeholder="digite sua senha do hook"
-            secureTextEntry={true}
-          />
-        )}
-      />
-      {errors.password && <Text style={styles.labelError}>{errors.password?.message}</Text>} */}
-
+           
       <TextInput
         onChangeText={setEmail}
         value={email}
