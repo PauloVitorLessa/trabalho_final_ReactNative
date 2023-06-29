@@ -9,6 +9,7 @@ import {
   ImageBackground,
   Dimensions,
 } from "react-native";
+
 import { useState, useContext, useEffect } from "react";
 import { Rating } from "react-native-ratings";
 import AxiosInstance from "../../api/AxiosInstance";

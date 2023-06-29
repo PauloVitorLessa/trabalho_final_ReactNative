@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import {
   StyleSheet,
   Text,
@@ -21,19 +22,29 @@ import {
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { armazenarDadosUsuario } = useContext(DataContext);
+  const {
+    armazenarDadosUsuario,
+    limpaDadosUsuario,
+    dadosUsuario,
+    loading,
+    setLoading,
+  } = useContext(DataContext);
   const [mostrarSenha, setMostrarSenha] = useState(false);
   const [carrinhofromDB, setCarrinhoFromDB] = useState("");
   const [loadingLogin, setLoadingLogin] = useState(false);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      limpaDadosUsuario();
+    }, [])
+  );
+
   const inicializaCarrinho = async (key, value) => {
     await deleteValue("carrinho");
-    //await save(key, value);
-    // let carrinhoTemp = await getValueFor(key);
-    // setCarrinhoFromDB(await getValueFor(key));
   };
 
   const handleLogin = async () => {
+    setLoading(true);
     setLoadingLogin(true);
     try {
       const resultado = await AxiosInstance.post("/auth/signin", {
@@ -55,7 +66,7 @@ export default function Login({ navigation }) {
         ];
         inicializaCarrinho("carrinho", carrinho);
 
-        navigation.navigate("Home");
+        //navigation.navigate("Home");
       } else {
         console.log("Erro ao realizar o login");
       }

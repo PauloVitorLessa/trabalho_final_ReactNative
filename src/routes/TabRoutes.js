@@ -1,12 +1,12 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import { StackCarrinho, StackEditoras, StackHome } from "./StackRoute";
-
-//import Home from "../pages/Home";
-import Login from "../pages/Login";
-import Carrinho from "../pages/Carrinho/Index";
-import HomeEditoras from "../pages/HomeEditoras";
+import {
+  StackCarrinho,
+  StackEditoras,
+  StackHome,
+  StackLogin,
+} from "./StackRoute";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,19 +20,21 @@ export default function TabRoutes() {
       }}
     >
       <Tab.Screen
-        name="Home"
+        name="Tab"
         component={StackHome}
         options={{
+          title: "Home",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" color={color} size={size} />
           ),
-          headerLeft: () => null
+          headerLeft: () => null,
         }}
       />
       <Tab.Screen
-        name="Editoras"
+        name="EditorasStack"
         component={StackEditoras}
         options={{
+          title: "Editoras",
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="local-library" color={color} size={size} />
           ),
@@ -50,7 +52,7 @@ export default function TabRoutes() {
       />
       <Tab.Screen
         name="Sair"
-        component={""}
+        component={StackLogin}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="logout" color={color} size={size} />

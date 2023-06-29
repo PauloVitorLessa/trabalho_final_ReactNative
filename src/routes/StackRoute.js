@@ -4,7 +4,6 @@ import Editora from "../pages/Editora";
 import HomeEditoras from "../pages/HomeEditoras";
 import Livro from "../pages/Livro";
 import PedidoConcluido from "../pages/PedidoConcluido";
-import TabRoutes from "./TabRoutes";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Carrinho from "../pages/Carrinho/Index";
@@ -26,11 +25,6 @@ export function StackLogin() {
       }}
     >
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen
-        name="Home"
-        component={TabRoutes}
-        options={{ title: "Livraria G3", headerLeft: () => null }}
-      />
     </Stack.Navigator>
   );
 }
@@ -47,7 +41,7 @@ export function StackCarrinho() {
       }}
     >
       <Stack.Screen
-        name="Carrinho"
+        name="carrinhoStack"
         component={Carrinho}
         options={{ headerShown: false }}
       />
@@ -82,7 +76,7 @@ export function StackHome() {
         options={{ title: "Livraria G3", headerLeft: () => null }}
       />
       <Stack.Screen
-        name="Editora"
+        name="EditoraStack"
         component={Editora}
         options={{ title: `${dadosEditora.nomeEditora}` }}
       />
