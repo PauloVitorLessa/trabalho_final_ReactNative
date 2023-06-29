@@ -15,7 +15,8 @@ const windowWidth = Dimensions.get("window").width;
 //const windowHeight = Dimensions.get("window").height;
 
 export default function CardLivro(props) {
-  const { setQtdCarrinho, qtdCarrinho } = useContext(DataContext);
+  const { setQtdCarrinho, qtdCarrinho, setQtdFavoritos, qtdFavoritos } =
+    useContext(DataContext);
 
   const livro = {
     codigoLivro: props.idLivro,
@@ -25,8 +26,12 @@ export default function CardLivro(props) {
   const handleOnPress = async () => {
     await addItem("carrinho", livro);
     setQtdCarrinho(qtdCarrinho + 1);
-    console.log("apos add carrinho");
-    console.log(await getValueFor("carrinho"));
+  };
+  const handleFavoritosOnPress = async () => {
+    const existente = await addItem("favoritos", livro);
+    if (existente === false) {
+      setQtdFavoritos(qtdFavoritos + 1);
+    }
   };
 
   return (
@@ -46,7 +51,10 @@ export default function CardLivro(props) {
               <FontAwesome name="shopping-cart" size={16} color="white" />
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.heart} onPress={handleOnPress}>
+          <TouchableOpacity
+            style={styles.heart}
+            onPress={handleFavoritosOnPress}
+          >
             <FontAwesome name="heart" size={25} color="red" />
           </TouchableOpacity>
         </View>
