@@ -52,7 +52,7 @@ const CardDestaque = ({ urlImage, title, description, rating }) => (
     <View style={styles.destaqueBodyContainer}>
       <View style={styles.divDestaque}>
         <Text style={styles.cardTitle}>{title}</Text>
-        <Text style={styles.cardDescription}>{description}</Text>
+
         <View style={styles.rating}>
           <MaterialIcons name="star" color="white" size={30} />
           <MaterialIcons name="star" color="white" size={30} />
@@ -257,7 +257,7 @@ const styles = StyleSheet.create({
   },
   imageCardDestaque: {
     width: windowWidth - 20,
-    height: windowHeight / 5,
+    height: windowHeight / 5.5,
     resizeMode: "cover",
   },
   CardLivro: {

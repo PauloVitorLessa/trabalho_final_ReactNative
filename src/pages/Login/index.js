@@ -14,11 +14,10 @@ import { Ionicons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
 import { deleteValue } from "../../services/DataService";
-import { StackLogin } from "../../routes/StackRoute";
+
 // import { useForm, Controller } from 'react-hook-form'
 // import { yupResolver } from '@hookform/resolvers/yup'
 // import * as yup from 'yup'
-
 
 // const Schema = yup.object({
 //   username: yup.string().required("Informe seu email"),
@@ -74,7 +73,7 @@ export default function Login({ navigation }) {
     } catch (error) {
       setLoadingLogin(false);
       setLoading(false);
-      Alert.alert('Email ou Usuário inválidos')
+      Alert.alert("Email ou Usuário inválidos");
       console.log("erro durante o processo de login: " + error);
     }
   };
@@ -87,7 +86,7 @@ export default function Login({ navigation }) {
     <View style={styles.container}>
       <Image style={styles.logo} source={require("../../assets/logo.png")} />
       <Text style={styles.text}>Bem-vindo(a)</Text>
-      
+
       {/* <Controller 
         control={control}
         name="username"
@@ -123,7 +122,7 @@ export default function Login({ navigation }) {
         )}
       />
       {errors.password && <Text style={styles.labelError}>{errors.password?.message}</Text>} */}
-           
+
       <TextInput
         onChangeText={setEmail}
         value={email}
@@ -231,8 +230,8 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
   },
   labelError: {
-    alignSelf: 'flex-start',
-    color: '#ff375b',
+    alignSelf: "flex-start",
+    color: "#ff375b",
     marginBottom: 8,
-  }
+  },
 });

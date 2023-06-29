@@ -14,8 +14,6 @@ import {
 import { Text, View } from "react-native";
 import React, { useContext } from "react";
 
-//import { View } from "lucide-react-native";
-
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
