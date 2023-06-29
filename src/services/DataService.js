@@ -14,7 +14,12 @@ export async function getValueFor(key) {
     if (result) {
       return JSON.parse(result);
     } else {
-      alert("Seu Carrinho está vazio ☹️");
+      if (key === "carrinho") {
+        alert("Seu Carrinho está vazio ☹️");
+      }
+      if (key === "favoritos") {
+        alert("Nenhum livro foi favoritado ainda ☹️");
+      }
     }
   } catch (error) {
     console.log("erro ao recuperar dados:" + error);
@@ -25,7 +30,7 @@ export async function deleteValue(key) {
   await SecureStore.deleteItemAsync(key);
 }
 
-export async function addCarrinho(key, value) {
+export async function addItem(key, value) {
   try {
     let resultArray = [];
     let result = await SecureStore.getItemAsync(key);
@@ -50,6 +55,6 @@ export async function addCarrinho(key, value) {
       await SecureStore.setItemAsync(key, JSON.stringify(resultArray));
     }
   } catch (error) {
-    console.log("erro ao persistir dados no addCarrinho:" + error);
+    console.log("erro ao persistir dados no addItem:" + error);
   }
 }

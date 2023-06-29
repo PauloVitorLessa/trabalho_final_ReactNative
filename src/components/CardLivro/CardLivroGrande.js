@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from "react-native";
 import { useContext } from "react";
-import { addCarrinho, getValueFor } from "../../services/DataService";
+import { addItem, getValueFor } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 import { DataContext } from "../../context/DataContext";
 
@@ -22,7 +22,7 @@ export default function CardLivroGrande(props) {
     quantidade: 1,
   };
   const handleOnPress = async () => {
-    await addCarrinho("carrinho", livro);
+    await addItem("carrinho", livro);
     setQtdCarrinho(qtdCarrinho + 1);
     console.log("apos add carrinho");
     console.log(await getValueFor("carrinho"));
@@ -38,12 +38,17 @@ export default function CardLivroGrande(props) {
       ></Image>
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>{props.title}</Text>
-        <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
-          <Text style={styles.btnComprar}>
-            COMPRAR
-            <FontAwesome name="shopping-cart" size={16} color="white" />
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.icons}>
+          <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
+            <Text style={styles.btnComprar}>
+              COMPRAR
+              <FontAwesome name="shopping-cart" size={16} color="white" />
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.heart} onPress={handleOnPress}>
+            <FontAwesome name="heart" size={25} color="red" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -93,5 +98,13 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     fontSize: 13,
+  },
+  icons: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 18,
+  },
+  heart: {
+    alignSelf: "center",
   },
 });

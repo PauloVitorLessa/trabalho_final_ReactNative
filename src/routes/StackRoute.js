@@ -7,6 +7,7 @@ import PedidoConcluido from "../pages/PedidoConcluido";
 import Login from "../pages/Login";
 import Home from "../pages/Home";
 import Carrinho from "../pages/Carrinho/Index";
+import Favoritos from "../pages/Favoritos";
 import { useContext } from "react";
 import { EditoraContext } from "../context/EditoraContext";
 
@@ -25,6 +26,29 @@ export function StackLogin() {
       }}
     >
       <Stack.Screen name="Login" component={Login} />
+    </Stack.Navigator>
+  );
+}
+export function StackFavoritos() {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "#fff8f7",
+        },
+        headerTintColor: "black",
+      }}
+    >
+      <Stack.Screen
+        name="carrinhoStack"
+        component={Favoritos}
+        options={{
+          headerShown: true,
+          headerLeft: () => null,
+          title: "Favoritos",
+        }}
+      />
     </Stack.Navigator>
   );
 }

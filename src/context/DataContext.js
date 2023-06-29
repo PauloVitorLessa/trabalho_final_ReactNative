@@ -8,6 +8,7 @@ export const DataProvider = ({ children }) => {
   const [listaEditoras, setListaEditoras] = useState("");
   const [loading, setLoading] = useState(false);
   const [qtdCarrinho, setQtdCarrinho] = useState(0);
+  const [qtdFavoritos, setQtdFavoritos] = useState(0);
 
   const limpaDadosUsuario = () => {
     setDadosUsuario("");
@@ -45,6 +46,8 @@ export const DataProvider = ({ children }) => {
         setLoading,
         qtdCarrinho,
         setQtdCarrinho,
+        qtdFavoritos,
+        setQtdFavoritos,
       }}
     >
       {children}

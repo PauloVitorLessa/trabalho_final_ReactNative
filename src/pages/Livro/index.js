@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { getValueFor, addCarrinho } from "../../services/DataService";
+import { getValueFor, addItem } from "../../services/DataService";
 import { LivroContext } from "../../context/LivroContext";
 import { DataContext } from "../../context/DataContext";
 
@@ -25,7 +25,7 @@ export default function Livro() {
     quantidade: 1,
   };
   const handleOnPress = async () => {
-    await addCarrinho("carrinho", livro);
+    await addItem("carrinho", livro);
     setQtdCarrinho(qtdCarrinho + 1);
     console.log("apos add carrinho");
     console.log(await getValueFor("carrinho"));

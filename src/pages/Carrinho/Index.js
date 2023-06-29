@@ -67,7 +67,7 @@ export default function Carrinho({ navigation }) {
           setLivrosCarrinhoDB(resultArray);
         }
       } catch (error) {
-        console.log("erro ao persistir dados no addCarrinho:" + error);
+        console.log("erro ao persistir dados no addItem:" + error);
       }
     }
   };

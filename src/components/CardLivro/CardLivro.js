@@ -9,7 +9,7 @@ import {
 import { useContext } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { DataContext } from "../../context/DataContext";
-import { addCarrinho, getValueFor } from "../../services/DataService";
+import { addItem, getValueFor } from "../../services/DataService";
 
 const windowWidth = Dimensions.get("window").width;
 //const windowHeight = Dimensions.get("window").height;
@@ -23,7 +23,7 @@ export default function CardLivro(props) {
     quantidade: 1,
   };
   const handleOnPress = async () => {
-    await addCarrinho("carrinho", livro);
+    await addItem("carrinho", livro);
     setQtdCarrinho(qtdCarrinho + 1);
     console.log("apos add carrinho");
     console.log(await getValueFor("carrinho"));
@@ -39,12 +39,17 @@ export default function CardLivro(props) {
       ></Image>
       <View style={styles.cardInfo}>
         <Text style={styles.cardTitle}>{props.title}</Text>
-        <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
-          <Text style={styles.btnComprar}>
-            COMPRAR
-            <FontAwesome name="shopping-cart" size={16} color="white" />
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.icons}>
+          <TouchableOpacity style={styles.cartButton} onPress={handleOnPress}>
+            <Text style={styles.btnComprar}>
+              COMPRAR
+              <FontAwesome name="shopping-cart" size={16} color="white" />
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.heart} onPress={handleOnPress}>
+            <FontAwesome name="heart" size={25} color="red" />
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -77,7 +82,6 @@ const styles = StyleSheet.create({
   cardInfo: {
     justifyContent: "center",
     flex: 1,
-    alignItems: "center",
   },
   cartButton: {
     backgroundColor: "transparent",
@@ -94,5 +98,13 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "white",
     fontWeight: "bold",
+  },
+  icons: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 10,
+  },
+  heart: {
+    alignSelf: "center",
   },
 });

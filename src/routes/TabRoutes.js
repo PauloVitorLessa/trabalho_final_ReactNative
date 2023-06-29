@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialIcons } from "@expo/vector-icons";
+import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import { Badge } from "@rneui/base";
 import { DataContext } from "../context/DataContext";
 
@@ -8,7 +8,9 @@ import {
   StackEditoras,
   StackHome,
   StackLogin,
+  StackFavoritos,
 } from "./StackRoute";
+
 import { Text, View } from "react-native";
 import React, { useContext } from "react";
 
@@ -17,7 +19,7 @@ import React, { useContext } from "react";
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
-  const { qtdCarrinho } = useContext(DataContext);
+  const { qtdFavoritos, qtdCarrinho } = useContext(DataContext);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -47,6 +49,24 @@ export default function TabRoutes() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Favoritos"
+        component={StackFavoritos}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <View>
+              <FontAwesome name="heart" color={color} size={size} />
+              <Badge
+                badgeStyle={{ backgroundColor: "#f95c47" }}
+                value={qtdFavoritos}
+                containerStyle={{ position: "absolute", top: -4, right: -10 }}
+              />
+            </View>
+          ),
+        }}
+      />
+
       <Tab.Screen
         name="Carrinho"
         component={StackCarrinho}
