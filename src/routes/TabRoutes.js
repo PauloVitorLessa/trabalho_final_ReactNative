@@ -1,5 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Badge } from "@rneui/base";
+import { DataContext } from "../context/DataContext";
 
 import {
   StackCarrinho,
@@ -7,10 +9,15 @@ import {
   StackHome,
   StackLogin,
 } from "./StackRoute";
+import { Text, View } from "react-native";
+import React, { useContext } from "react";
+
+//import { View } from "lucide-react-native";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabRoutes() {
+  const { qtdCarrinho } = useContext(DataContext);
   return (
     <Tab.Navigator
       screenOptions={{
@@ -46,7 +53,14 @@ export default function TabRoutes() {
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="shopping-cart" color={color} size={size} />
+            <View>
+              <MaterialIcons name="shopping-cart" color={color} size={size} />
+              <Badge
+                badgeStyle={{ backgroundColor: "#f95c47" }}
+                value={qtdCarrinho}
+                containerStyle={{ position: "absolute", top: -4, right: -10 }}
+              />
+            </View>
           ),
         }}
       />

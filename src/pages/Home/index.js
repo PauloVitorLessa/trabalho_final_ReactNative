@@ -8,10 +8,13 @@ import {
   ActivityIndicator,
   Dimensions,
 } from "react-native";
+import React from "react";
 import { useState, useContext, useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import AxiosInstance from "../../api/AxiosInstance";
 import { DataContext } from "../../context/DataContext";
+import { LivroContext } from "../../context/LivroContext";
 import { EditoraContext } from "../../context/EditoraContext";
 import LivrosRecentes from "../../components/LivrosRecentes";
 
@@ -64,14 +67,22 @@ const CardDestaque = ({ urlImage, title, description, rating }) => (
 export default function Home({ navigation }) {
   const { dadosUsuario } = useContext(DataContext);
   const { armazenarListaEditora } = useContext(DataContext);
+  const { armazenarDadosLivro } = useContext(LivroContext);
   const [dadosEditora, setDadosEditora] = useState();
   const [loadingLogin, setLoadingLogin] = useState(false);
+  const [loadingDestaque, setLoadingDestaque] = useState(false);
   const [livro, setLivro] = useState("");
+
+  useFocusEffect(
+    React.useCallback(() => {
+      setLoadingDestaque(true);
+      getLivro();
+    }, [])
+  );
 
   useEffect(() => {
     setLoadingLogin(true);
     getTodasEditoras();
-    getLivro();
   }, []);
 
   const getTodasEditoras = async () => {
@@ -81,6 +92,7 @@ export default function Home({ navigation }) {
       .then((resultado) => {
         setDadosEditora(resultado.data);
         armazenarListaEditora(resultado.data);
+        setLoadingLogin(false);
       })
       .catch((error) => {
         console.log(
@@ -90,17 +102,22 @@ export default function Home({ navigation }) {
   };
 
   const getLivro = async () => {
-    const randomNumber = Math.floor(Math.random() * 10) + 1;
+    const randomNumber = Math.floor(Math.random() * (22 - 17)) + 17;
     await AxiosInstance.get(`/livros/${randomNumber}`, {
       headers: { Authorization: `Bearer ${dadosUsuario?.token}` },
     })
       .then((resultado) => {
         setLivro(resultado.data);
-        setLoadingLogin(false);
+        setLoadingDestaque(false);
       })
       .catch((error) => {
         console.log("Ocorreu um erro ao recuperar os dados: " + error);
       });
+  };
+
+  const handleCardDestaqueOnPress = () => {
+    armazenarDadosLivro(livro);
+    navigation.navigate("Livro");
   };
 
   return (
@@ -124,15 +141,17 @@ export default function Home({ navigation }) {
       <LivrosRecentes navigation={navigation} />
       <View style={styles.destaqueContainer}>
         <Text style={styles.titleDestaque}>DESTAQUES</Text>
-        {loadingLogin ? (
+        {loadingDestaque ? (
           <ActivityIndicator size={20} color="#FFF" />
         ) : (
-          <CardDestaque
-            urlImage={`data:image/png;base64,${livro.img}`}
-            title={livro.nomeLivro}
-            description={livro.descricao}
-            rating={MaterialIcons}
-          />
+          <TouchableOpacity onPress={handleCardDestaqueOnPress}>
+            <CardDestaque
+              urlImage={`data:image/png;base64,${livro.img}`}
+              title={livro.nomeLivro}
+              description={livro.descricao}
+              rating={MaterialIcons}
+            />
+          </TouchableOpacity>
         )}
       </View>
     </View>

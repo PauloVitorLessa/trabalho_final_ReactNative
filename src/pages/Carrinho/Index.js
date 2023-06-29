@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import {
   Text,
@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { RadioButton } from "react-native-paper";
-
+import { DataContext } from "../../context/DataContext";
 import { FontAwesome } from "@expo/vector-icons";
 import { save, getValueFor, deleteValue } from "../../services/DataService";
 import CardCarrinho from "../../components/CardLivro/CardCarrinho";
@@ -22,6 +22,7 @@ export default function Carrinho({ navigation }) {
   const [livrosCarrinhoDB, setLivrosCarrinhoDB] = useState([]);
   const [checked, setChecked] = React.useState("first");
   const [selectedBook, setSelectedBook] = React.useState("");
+  const { setQtdCarrinho, qtdCarrinho } = useContext(DataContext);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -32,9 +33,11 @@ export default function Carrinho({ navigation }) {
     }, [])
   );
   const handleButton = async () => {
-    await deleteValue("carrinho");
-
-    navigation.navigate("PedidoFinalizado");
+    if (livrosCarrinhoDB && livrosCarrinhoDB.length !== 0) {
+      await deleteValue("carrinho");
+      setQtdCarrinho(0);
+      navigation.navigate("PedidoFinalizado");
+    }
   };
 
   const handleOnPress = (item) => {
@@ -50,6 +53,9 @@ export default function Carrinho({ navigation }) {
         if (result) {
           resultArray = result;
           console.log("arrey from db :" + JSON.stringify(resultArray));
+          livro = resultArray.filter(
+            (element) => element.codigoLivro === selectedBook.codigoLivro
+          );
           resultArray = resultArray.filter(
             (element) => element.codigoLivro !== selectedBook.codigoLivro
           );
@@ -57,6 +63,7 @@ export default function Carrinho({ navigation }) {
           console.log("arrey to db :" + JSON.stringify(resultArray));
 
           await save("carrinho", resultArray);
+          setQtdCarrinho(qtdCarrinho - livro[0].quantidade);
           setLivrosCarrinhoDB(resultArray);
         }
       } catch (error) {
@@ -103,7 +110,7 @@ export default function Carrinho({ navigation }) {
       </View>
       <View style={styles.total}>
         <Text style={styles.text}>Total</Text>
-        <Text style={styles.text}>Grátis</Text>
+        <Text style={styles.text}>{qtdCarrinho}</Text>
       </View>
       <Text style={styles.cardTitle}>Pagamento</Text>
       <View style={styles.pagamento}>

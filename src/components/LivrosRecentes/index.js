@@ -21,7 +21,14 @@ const Item = ({ img, nav, item, func }) => (
   <TouchableOpacity
     style={styles.item}
     onPress={() => {
-      func(item);
+      let livro = {
+        img: item.imagem,
+        title: item.nomeLivro,
+        codigoLivro: item.codigoLivro,
+        descricao: item.descricao,
+      };
+
+      func(livro);
       nav.navigate("Livro");
     }}
   >
@@ -75,7 +82,6 @@ export default function LivrosRecentes({ navigation }) {
               <Item
                 img={item.img}
                 nav={navigation}
-                nome={item.nomeEditora}
                 item={item}
                 func={armazenarDadosLivro}
               />

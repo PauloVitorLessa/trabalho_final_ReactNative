@@ -65,6 +65,7 @@ export function StackHome() {
 
   return (
     <Stack.Navigator
+      initialRouteName="Home"
       screenOptions={{
         headerTitleAlign: "center",
         headerStyle: {

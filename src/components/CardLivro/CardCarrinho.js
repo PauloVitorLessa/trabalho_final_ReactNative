@@ -8,7 +8,8 @@ import {
 } from "react-native";
 import React from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { DataContext } from "../../context/DataContext";
 import { getValueFor, addCarrinho } from "../../services/DataService";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -16,6 +17,7 @@ const windowWidth = Dimensions.get("window").width;
 //const windowHeight = Dimensions.get("window").height;
 
 export default function CardCarrinho(props) {
+  const { setQtdCarrinho, qtdCarrinho } = useContext(DataContext);
   const [quantity, setQuantity] = useState(0);
 
   useFocusEffect(
@@ -45,6 +47,7 @@ export default function CardCarrinho(props) {
       await addCarrinho("carrinho", livro);
 
       setQuantity(quantity + 1);
+      setQtdCarrinho(qtdCarrinho + 1);
     } catch (error) {
       console.log("erro ao persistir dados no addCarrinho:" + error);
     }
@@ -53,12 +56,16 @@ export default function CardCarrinho(props) {
   const decrementQuantity = async () => {
     let livro = props;
     livro.quantidade = -1;
-    try {
-      await addCarrinho("carrinho", livro);
 
-      setQuantity(quantity - 1);
-    } catch (error) {
-      console.log("erro ao persistir dados no addCarrinho:" + error);
+    if (quantity > 1) {
+      try {
+        await addCarrinho("carrinho", livro);
+
+        setQuantity(quantity - 1);
+        setQtdCarrinho(qtdCarrinho - 1);
+      } catch (error) {
+        console.log("erro ao persistir dados no addCarrinho:" + error);
+      }
     }
   };
 

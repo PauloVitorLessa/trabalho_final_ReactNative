@@ -6,13 +6,17 @@ import {
   Image,
   Dimensions,
 } from "react-native";
+import { useContext } from "react";
 import { FontAwesome } from "@expo/vector-icons";
+import { DataContext } from "../../context/DataContext";
 import { addCarrinho, getValueFor } from "../../services/DataService";
 
 const windowWidth = Dimensions.get("window").width;
 //const windowHeight = Dimensions.get("window").height;
 
 export default function CardLivro(props) {
+  const { setQtdCarrinho, qtdCarrinho } = useContext(DataContext);
+
   const livro = {
     codigoLivro: props.idLivro,
     title: props.title,
@@ -20,6 +24,7 @@ export default function CardLivro(props) {
   };
   const handleOnPress = async () => {
     await addCarrinho("carrinho", livro);
+    setQtdCarrinho(qtdCarrinho + 1);
     console.log("apos add carrinho");
     console.log(await getValueFor("carrinho"));
   };

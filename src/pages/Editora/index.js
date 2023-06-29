@@ -19,6 +19,7 @@ const windowHeight = Dimensions.get("window").height;
 
 const RenderHomeEditora = ({ item, navigation }) => {
   const { armazenarDadosLivro } = useContext(LivroContext);
+
   const onPressHandler = (livro) => {
     armazenarDadosLivro(livro);
     navigation.navigate("Livro");
