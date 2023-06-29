@@ -54,7 +54,7 @@ export default function Livro() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: "#696462",
     flex: 1,
   },
   cardInfo: {

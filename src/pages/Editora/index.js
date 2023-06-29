@@ -4,6 +4,7 @@ import {
   TouchableOpacity,
   FlatList,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { useState, useContext, useEffect } from "react";
 import AxiosInstance from "../../api/AxiosInstance";
@@ -127,8 +128,10 @@ export default function Editora({ navigation }) {
   const { dadosUsuario } = useContext(DataContext);
   const { dadosEditora } = useContext(EditoraContext);
   const [livrosEditora, setLivrosEditora] = useState([]);
+  const [loadingLogin, setLoadingLogin] = useState(false);
 
   useEffect(() => {
+    setLoadingLogin(true);
     const getLivrosEditora = async () => {
       await AxiosInstance.get(
         `/livros/por-editora/${dadosEditora.codigoEditora}`,
@@ -138,6 +141,7 @@ export default function Editora({ navigation }) {
       )
         .then((resultado) => {
           setLivrosEditora(resultado.data);
+          setLoadingLogin(false);
         })
         .catch((error) => {
           console.log(
@@ -152,13 +156,17 @@ export default function Editora({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={dataList}
-        renderItem={({ item }) => (
-          <RenderHomeEditora item={item} navigation={navigation} />
+      {loadingLogin ? (
+          <ActivityIndicator size={20} color="#FFF" />
+        ) : (
+          <FlatList
+            data={dataList}
+            renderItem={({ item }) => (
+              <RenderHomeEditora item={item} navigation={navigation} />
+            )}
+            keyExtractor={(item, index) => "key" + index}
+          />
         )}
-        keyExtractor={(item, index) => "key" + index}
-      />
     </View>
   );
 }
